@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurological Therapy for Children & Families | NeuroCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #0d7377;
+            --teal-dark: #0a5c5f;
+            --slate: #2c3e50;
+            --slate-light: #4a6582;
+            --gray-600: #64748b;
+            --gray-100: #f9fafb;
+            --accent-border: #c2b6aec9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #faf9f7 0%, #f5f3f0 50%, #faf8f5 100%);
+            color: var(--slate);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--accent-border));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Section Highlight */
+        .section-highlight {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .section-highlight.active {
+            background: rgba(13, 115, 119, 0.02);
+        }
+
+        /* Animations */
+        .fade-slide {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-slide.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .parallax {
+            transform: translateY(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+        .stagger-7 { transition-delay: 0.7s; }
+        .stagger-8 { transition-delay: 0.8s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 140, 60, 0.3) 50%, transparent 100%);
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250, 251, 252, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(44, 62, 80, 0.06);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        header.revealed {
+            transform: translateY(0);
+        }
+
+        header.scrolled {
+            background: rgba(250, 251, 252, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--slate);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--teal);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .logo-text {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-light);
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+            background: rgba(13, 115, 119, 0.06);
+        }
+
+        .btn-cta {
+            background: var(--teal);
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .btn-cta:hover {
+            background: var(--teal-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 120px 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13, 115, 119, 0.78), rgba(44, 62, 80, 0.68));
+            z-index: 1;
+        }
+
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            color: white;
+            max-width: 700px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 32px;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--teal-dark);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2rem);
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        /* Modern Section Headings */
+        .modern-heading {
+            position: relative;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .modern-heading::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--accent-border));
+            border-radius: 2px;
+        }
+
+        .modern-heading h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .modern-heading .subtitle {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Gradient Heading Style */
+        .gradient-heading {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .gradient-heading h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(2rem, 4.5vw, 2.6rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--teal), var(--slate));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .gradient-heading .highlight {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(13, 115, 119, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .gradient-heading p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Badge Heading Style */
+        .badge-heading {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .badge-heading .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--teal);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .badge-heading .badge::before {
+            content: '✨';
+            font-size: 1rem;
+        }
+
+        .badge-heading h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .badge-heading p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Underline Heading Style */
+        .underline-heading {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .underline-heading h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .underline-heading h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+            border-radius: 2px;
+        }
+
+        .underline-heading .description {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about-section {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .about-card {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-border);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .about-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(255, 140, 60, 0.2);
+        }
+
+        .about-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: rgba(13, 115, 119, 0.08);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .about-card h3 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 12px;
+        }
+
+        .about-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 50px 0;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            border: 2px solid rgba(13, 115, 119, 0.2);
+            border-radius: 12px;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--teal);
+            outline: none;
+        }
+
+        .search-results {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Conditions Section */
+        .conditions-section {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 248, 242, 0.3) 100%);
+        }
+
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .condition-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
+            padding: 28px;
+            border-radius: 12px;
+            border-top: 4px solid var(--accent-border);
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .condition-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 140, 60, 0.15);
+        }
+
+        .condition-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .condition-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: rgba(13, 115, 119, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .condition-content h4 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 8px;
+        }
+
+        .condition-content p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .condition-toggle {
+            background: none;
+            border: none;
+            color: var(--teal);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: auto;
+            transition: transform 0.2s;
+        }
+
+        .condition-card.expanded .condition-toggle {
+            transform: rotate(180deg);
+        }
+
+        .condition-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .condition-card.expanded .condition-details {
+            max-height: 500px;
+        }
+
+        .condition-details h5 {
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .condition-details ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .condition-details li {
+            padding: 4px 0;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .condition-details li::before {
+            content: '•';
+            color: var(--teal);
+            margin-right: 8px;
+        }
+
+        /* Therapists Section */
+        .therapists-section {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .therapists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .therapist-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 248, 242, 0.95) 100%);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            border-left: 5px solid var(--accent-border);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .therapist-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 70px rgba(255, 140, 60, 0.18);
+        }
+
+        .therapist-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--accent-border);
+            transition: transform 0.35s ease;
+        }
+
+        .therapist-card:hover .therapist-photo {
+            transform: scale(1.08);
+        }
+
+        .therapist-card h3 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 8px;
+        }
+
+        .therapist-qualification {
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .therapist-experience {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .therapy-services {
+            background: linear-gradient(180deg, rgba(255, 248, 242, 0.3) 0%, rgba(255, 255, 255, 0.4) 100%);
+        }
+
+        .therapy-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .therapy-service-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            border-top: 5px solid var(--accent-border);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .therapy-service-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 70px rgba(255, 140, 60, 0.18);
+        }
+
+        .therapy-service-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .therapy-service-card:hover .therapy-service-image {
+            transform: scale(1.08);
+        }
+
+        .therapy-service-content {
+            padding: 24px;
+        }
+
+        .therapy-service-content h4 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 10px;
+        }
+
+        .therapy-service-content p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+
+        .process-step {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 248, 242, 0.95) 100%);
+            padding: 32px 24px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-border);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .process-step:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 25px 60px rgba(255, 140, 60, 0.15);
+        }
+
+        .process-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .process-step h4 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Why Choose Section */
+        .why-choose-section {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 248, 242, 0.3) 100%);
+        }
+
+        .why-choose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .why-choose-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
+            padding: 28px;
+            border-radius: 12px;
+            border-top: 4px solid var(--accent-border);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .why-choose-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 140, 60, 0.15);
+        }
+
+        .why-choose-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(13, 115, 119, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--teal);
+            flex-shrink: 0;
+        }
+
+        .why-choose-item p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .resource-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 248, 242, 0.95) 100%);
+            padding: 32px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-border);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 30px 70px rgba(255, 140, 60, 0.18);
+        }
+
+        .resource-card h4 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 12px;
+        }
+
+        .resource-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .resource-link {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(180deg, rgba(255, 248, 242, 0.3) 0%, rgba(255, 255, 255, 0.4) 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
+            padding: 32px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-border);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 30px 70px rgba(255, 140, 60, 0.18);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--slate);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-info h5 {
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 4px;
+        }
+
+        .testimonial-info p {
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+
+        .testimonial-progress {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(44, 62, 80, 0.08);
+            color: var(--teal);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 64px 0 88px;
+        }
+
+        .cta-box {
+            background: var(--teal);
+            padding: 56px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-box h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .cta-box p {
+            opacity: 0.95;
+            margin-bottom: 28px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--teal);
+        }
+
+        .btn-white:hover {
+            background: var(--gray-100);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0 28px;
+            background: var(--slate);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                min-height: 500px;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">N</div>
+                    <span class="logo-text">NeuroCare</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#conditions">Conditions</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact" class="btn-cta">Book a Session</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero section-highlight parallax" id="hero">
+        <img src="https://media.istockphoto.com/id/1458679940/photo/kindergarden.jpg?s=1024x1024&w=is&k=20&c=LwRGnqqNUlYDKh8ZSpF3Jv9N-D4iHzNUrbEBK1EBVec=" alt="Parent, child and therapist working together" class="hero-image">
+        <div class="hero-content">
+            <span class="hero-badge fade-slide">Evidence-Based Care</span>
+            <h1 class="fade-slide stagger-1">Neurological Therapy for Children & Families</h1>
+            <p class="fade-slide stagger-2">Your child's journey to better neurological health starts here. We provide compassionate, family-centered care focused on long-term improvement.</p>
+            <div class="hero-buttons fade-slide stagger-3">
+                <a href="#contact" class="btn btn-primary">Learn More About Therapy</a>
+                <a href="#services" class="btn btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- About Us / Mission Section -->
+    <section class="about-section section-highlight" id="about">
+        <div class="container">
+            <div class="section-title fade-slide">
+                <h2>Our Mission</h2>
+                <p>Compassionate care focused on lasting change</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card scale-in stagger-1">
+                    <div class="about-icon">💚</div>
+                    <h3>Compassion</h3>
+                    <p>We approach every child and family with empathy, understanding, and genuine care for their unique journey.</p>
+                </div>
+                <div class="about-card scale-in stagger-2">
+                    <div class="about-icon">👨👩👧👦</div>
+                    <h3>Family-Centered Care</h3>
+                    <p>Parents and caregivers are essential partners in the therapeutic process, ensuring progress extends beyond our sessions.</p>
+                </div>
+                <div class="about-card scale-in stagger-3">
+                    <div class="about-icon">🎯</div>
+                    <h3>Long-Term Improvement</h3>
+                    <p>We focus on sustainable progress and lasting change, not quick fixes. Your child's long-term wellbeing is our priority.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Search Section -->
+    <section class="search-section section-highlight">
+        <div class="container">
+            <div class="search-container fade-slide">
+                <input type="text" id="disorder-search" class="search-input" placeholder="Search disorders by name (e.g., cerebral palsy, autism, ADHD)...">
+                <div id="search-results" class="search-results"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conditions We Treat Section -->
+    <section class="conditions-section section-highlight" id="conditions">
+        <div class="container">
+            <div class="gradient-heading fade-slide">
+                <div class="highlight">Specialized Care</div>
+                <h2>Conditions We Treat</h2>
+                <p>Comprehensive neurological therapy for various conditions affecting children and families</p>
+            </div>
+            <div class="conditions-grid">
+                <div class="condition-card scale-in stagger-1" data-condition="cerebral palsy">
+                    <div class="condition-card-header">
+                        <div class="condition-icon">🧠</div>
+                        <div class="condition-content">
+                            <h4>Cerebral Palsy</h4>
+                            <p>Improving motor function, coordination, and independence through targeted interventions.</p>
+                        </div>
+                        <button class="condition-toggle">▼</button>
+                    </div>
+                    <div class="condition-details">
+                        <div class="condition-symptoms">
+                            <h5>Common Symptoms:</h5>
+                            <ul>
+                                <li>Muscle stiffness or weakness</li>
+                                <li>Difficulty with coordination</li>
+                                <li>Balance problems</li>
+                                <li>Involuntary movements</li>
+                            </ul>
+                        </div>
+                        <div class="condition-treatments">
+                            <h5>Our Treatments:</h5>
+                            <ul>
+                                <li>Physical therapy for mobility</li>
+                                <li>Occupational therapy for daily skills</li>
+                                <li>Gait training and balance work</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="condition-card scale-in stagger-2" data-condition="autism spectrum disorder">
+                    <div class="condition-card-header">
+                        <div class="condition-icon">⚡</div>
+                        <div class="condition-content">
+                            <h4>Autism Spectrum Disorder</h4>
+                            <p>Supporting communication, social skills, and sensory processing.</p>
+                        </div>
+                        <button class="condition-toggle">▼</button>
+                    </div>
+                    <div class="condition-details">
+                        <div class="condition-symptoms">
+                            <h5>Common Symptoms:</h5>
+                            <ul>
+                                <li>Difficulty with social communication</li>
+                                <li>Repetitive behaviors</li>
+                                <li>Sensory sensitivities</li>
+                                <li>Challenges with routine changes</li>
+                            </ul>
+                        </div>
+                        <div class="condition-treatments">
+                            <h5>Our Treatments:</h5>
+                            <ul>
+                                <li>Sensory integration therapy</li>
+                                <li>Communication skill development</li>
+                                <li>Social skills training</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="condition-card scale-in stagger-3" data-condition="adhd attention deficit">
+                    <div class="condition-card-header">
+                        <div class="condition-icon">🎯</div>
+                        <div class="condition-content">
+                            <h4>ADHD</h4>
+                            <p>Enhancing focus, attention, and executive function skills.</p>
+                        </div>
+                        <button class="condition-toggle">▼</button>
+                    </div>
+                    <div class="condition-details">
+                        <div class="condition-symptoms">
+                            <h5>Common Symptoms:</h5>
+                            <ul>
+                                <li>Difficulty focusing or paying attention</li>
+                                <li>Hyperactivity and impulsiveness</li>
+                                <li>Problems with organization</li>
+                                <li>Difficulty following instructions</li>
+                            </ul>
+                        </div>
+                        <div class="condition-treatments">
+                            <h5>Our Treatments:</h5>
+                            <ul>
+                                <li>Cognitive behavioral therapy</li>
+                                <li>Executive function training</li>
+                                <li>Attention and focus exercises</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="condition-card scale-in stagger-4" data-condition="developmental delays">
+                    <div class="condition-card-header">
+                        <div class="condition-icon">🦴</div>
+                        <div class="condition-content">
+                            <h4>Developmental Delays</h4>
+                            <p>Supporting milestone achievement and developmental progress.</p>
+                        </div>
+                        <button class="condition-toggle">▼</button>
+                    </div>
+                    <div class="condition-details">
+                        <div class="condition-symptoms">
+                            <h5>Common Symptoms:</h5>
+                            <ul>
+                                <li>Delayed motor skills</li>
+                                <li>Speech and language delays</li>
+                                <li>Cognitive development delays</li>
+                                <li>Social and emotional delays</li>
+                            </ul>
+                        </div>
+                        <div class="condition-treatments">
+                            <h5>Our Treatments:</h5>
+                            <ul>
+                                <li>Early intervention therapy</li>
+                                <li>Developmental milestone support</li>
+                                <li>Family-centered care plans</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="condition-card scale-in stagger-5" data-condition="learning disabilities">
+                    <div class="condition-card-header">
+                        <div class="condition-icon">🧩</div>
+                        <div class="condition-content">
+                            <h4>Learning Disabilities</h4>
+                            <p>Addressing cognitive challenges and building academic skills.</p>
+                        </div>
+                        <button class="condition-toggle">▼</button>
+                    </div>
+                    <div class="condition-details">
+                        <div class="condition-symptoms">
+                            <h5>Common Symptoms:</h5>
+                            <ul>
+                                <li>Difficulty with reading or writing</li>
+                                <li>Problems with math concepts</li>
+                                <li>Memory and processing issues</li>
+                                <li>Trouble following directions</li>
+                            </ul>
+                        </div>
+                        <div class="condition-treatments">
+                            <h5>Our Treatments:</h5>
+                            <ul>
+                                <li>Cognitive skill development</li>
+                                <li>Academic support strategies</li>
+                                <li>Memory and processing training</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="condition-card scale-in stagger-6" data-condition="motor disorders">
+                    <div class="condition-card-header">
+                        <div class="condition-icon">💪</div>
+                        <div class="condition-content">
+                            <h4>Motor Disorders</h4>
+                            <p>Improving coordination, balance, and fine motor skills.</p>
+                        </div>
+                        <button class="condition-toggle">▼</button>
+                    </div>
+                    <div class="condition-details">
+                        <div class="condition-symptoms">
+                            <h5>Common Symptoms:</h5>
+                            <ul>
+                                <li>Poor coordination</li>
+                                <li>Balance difficulties</li>
+                                <li>Fine motor skill challenges</li>
+                                <li>Muscle weakness or stiffness</li>
+                            </ul>
+                        </div>
+                        <div class="condition-treatments">
+                            <h5>Our Treatments:</h5>
+                            <ul>
+                                <li>Motor skill development</li>
+                                <li>Balance and coordination training</li>
+                                <li>Strength and flexibility exercises</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Therapists Section -->
+    <section class="therapists-section section-highlight">
+        <div class="container">
+            <div class="badge-heading fade-slide">
+                <div class="badge">Expert Team</div>
+                <h2>Our Therapists</h2>
+                <p>Experienced professionals dedicated to your child's progress and development</p>
+            </div>
+            <div class="therapists-grid">
+                <div class="therapist-card scale-in stagger-1">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop" alt="Dr. Sarah Johnson" class="therapist-photo">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <div class="therapist-qualification">Ph.D. in Pediatric Neurology</div>
+                    <div class="therapist-experience">15+ years of experience</div>
+                </div>
+                <div class="therapist-card scale-in stagger-2">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop" alt="Michael Chen" class="therapist-photo">
+                    <h3>Michael Chen</h3>
+                    <div class="therapist-qualification">Licensed Occupational Therapist</div>
+                    <div class="therapist-experience">12+ years of experience</div>
+                </div>
+                <div class="therapist-card scale-in stagger-3">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Emily Rodriguez" class="therapist-photo">
+                    <h3>Emily Rodriguez</h3>
+                    <div class="therapist-qualification">Certified Neurological Physiotherapist</div>
+                    <div class="therapist-experience">10+ years of experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Therapy Services Section -->
+    <section class="therapy-services section-highlight" id="services">
+        <div class="container">
+            <div class="modern-heading fade-slide">
+                <h2>Our Therapy Services</h2>
+                <div class="subtitle">Comprehensive neurological therapy programs designed to support your child's unique journey</div>
+            </div>
+            <div class="therapy-services-grid">
+                <div class="therapy-service-card scale-in stagger-1">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" alt="Neurological Physiotherapy" class="therapy-service-image">
+                    <div class="therapy-service-content">
+                        <h4>Neurological Physiotherapy</h4>
+                        <p>Specialized movement therapy to improve motor function and mobility.</p>
+                    </div>
+                </div>
+                <div class="therapy-service-card scale-in stagger-2">
+                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=400&fit=crop" alt="Occupational Therapy" class="therapy-service-image">
+                    <div class="therapy-service-content">
+                        <h4>Occupational Therapy</h4>
+                        <p>Enhancing daily living skills and independence through purposeful activities.</p>
+                    </div>
+                </div>
+                <div class="therapy-service-card scale-in stagger-3">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop" alt="Balance & Gait Training" class="therapy-service-image">
+                    <div class="therapy-service-content">
+                        <h4>Balance & Gait Training</h4>
+                        <p>Improving stability, coordination, and walking patterns.</p>
+                    </div>
+                </div>
+                <div class="therapy-service-card scale-in stagger-4">
+                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&h=400&fit=crop" alt="Cognitive & Motor Skills Therapy" class="therapy-service-image">
+                    <div class="therapy-service-content">
+                        <h4>Cognitive & Motor Skills Therapy</h4>
+                        <p>Integrated approach to enhance thinking, planning, and movement coordination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Therapy Process Section -->
+    <section class="process-section section-highlight">
+        <div class="container">
+            <div class="section-title fade-slide">
+                <h2>Your Therapy Journey</h2>
+                <p>Our structured approach to your child's progress</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step scale-in stagger-1">
+                    <div class="process-number">1</div>
+                    <h4>Assessment</h4>
+                    <p>Comprehensive evaluation of your child's needs, strengths, and goals.</p>
+                </div>
+                <div class="process-step scale-in stagger-2">
+                    <div class="process-number">2</div>
+                    <h4>Personalized Plan</h4>
+                    <p>Customized treatment plan tailored to your child's unique requirements.</p>
+                </div>
+                <div class="process-step scale-in stagger-3">
+                    <div class="process-number">3</div>
+                    <h4>Guided Sessions</h4>
+                    <p>Regular therapy sessions with our experienced team in a supportive environment.</p>
+                </div>
+                <div class="process-step scale-in stagger-4">
+                    <div class="process-number">4</div>
+                    <h4>Progress Tracking</h4>
+                    <p>Ongoing monitoring and adjustments to ensure continuous improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-section section-highlight">
+        <div class="container">
+            <div class="underline-heading fade-slide">
+                <h2>Why Choose Us</h2>
+                <div class="description">Discover what sets our approach apart and makes us the trusted choice for families</div>
+            </div>
+            <div class="why-choose-grid">
+                <div class="why-choose-item fade-slide stagger-1">
+                    <div class="why-choose-icon">👶</div>
+                    <p>Child-friendly & family-focused care that makes therapy comfortable and effective.</p>
+                </div>
+                <div class="why-choose-item fade-slide stagger-2">
+                    <div class="why-choose-icon">✅</div>
+                    <p>Certified neurological therapists with specialized pediatric training.</p>
+                </div>
+                <div class="why-choose-item fade-slide stagger-3">
+                    <div class="why-choose-icon">📋</div>
+                    <p>Personalized treatment plans designed specifically for your child's needs.</p>
+                </div>
+                <div class="why-choose-item fade-slide stagger-4">
+                    <div class="why-choose-icon">🏡</div>
+                    <p>Calm & supportive environment that promotes healing and growth.</p>
+                </div>
+                <div class="why-choose-item fade-slide stagger-5">
+                    <div class="why-choose-icon">📈</div>
+                    <p>Progress-focused therapy with measurable outcomes and regular updates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Educational Resources Section -->
+    <section class="resources-section section-highlight">
+        <div class="container">
+            <div class="section-title fade-slide">
+                <h2>Educational Resources</h2>
+                <p>Helpful information for families</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card scale-in stagger-1">
+                    <h4>Understanding Neurological Conditions</h4>
+                    <p>Learn about common neurological conditions affecting children and how therapy can help.</p>
+                    <a href="#" class="resource-link">Read More →</a>
+                </div>
+                <div class="resource-card scale-in stagger-2">
+                    <h4>Supporting Your Child at Home</h4>
+                    <p>Practical strategies and activities to reinforce therapy progress between sessions.</p>
+                    <a href="#" class="resource-link">Read More →</a>
+                </div>
+                <div class="resource-card scale-in stagger-3">
+                    <h4>Family Resources & Support</h4>
+                    <p>Access to support groups, workshops, and resources for families navigating neurological challenges.</p>
+                    <a href="#" class="resource-link">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section section-highlight">
+        <div class="container">
+            <div class="gradient-heading fade-slide">
+                <div class="highlight">Success Stories</div>
+                <h2>What Families Say</h2>
+                <p>Real feedback from parents and children who have experienced our transformative care</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scale-in stagger-1">
+                    <div class="testimonial-quote">"The progress our daughter has made in just 6 months is remarkable. The therapists are patient, understanding, and truly care about her success."</div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop" alt="Parent" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h5>Jennifer Martinez</h5>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-progress">6 months of therapy</div>
+                </div>
+                <div class="testimonial-card scale-in stagger-2">
+                    <div class="testimonial-quote">"My son looks forward to his sessions. The team has helped him gain confidence and independence we never thought possible."</div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="Parent" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h5>David Thompson</h5>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-progress">1 year of therapy</div>
+                </div>
+                <div class="testimonial-card scale-in stagger-3">
+                    <div class="testimonial-quote">"The family-centered approach means we're all learning together. Our therapist has been incredible at helping us support our child at home."</div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop" alt="Parent" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h5>Lisa Chen</h5>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-progress">8 months of therapy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CTA Section -->
+    <section class="cta-section section-highlight" id="contact">
+        <div class="container">
+            <div class="cta-box fade-slide">
+                <h2>Ready to Begin Your Child's Journey?</h2>
+                <p>Schedule a consultation to discuss your child's needs and learn how we can help.</p>
+                <a href="#" class="btn btn-primary btn-white">Schedule Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 NeuroCare — Neurological Therapy for Children & Families. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Indicator
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        }
+
+        // Sticky Header with Reveal
+        function handleHeaderReveal() {
+            const header = document.getElementById('header');
+            const scrollTop = window.pageYOffset;
+            
+            if (scrollTop > 100) {
+                header.classList.add('revealed', 'scrolled');
+            } else {
+                header.classList.remove('revealed', 'scrolled');
+            }
+        }
+
+        // Section Highlighting
+        function highlightActiveSection() {
+            const sections = document.querySelectorAll('.section-highlight');
+            const scrollTop = window.pageYOffset + window.innerHeight / 2;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollTop >= sectionTop && scrollTop <= sectionTop + sectionHeight) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        // Light Parallax Effect
+        function handleParallax() {
+            const parallaxElements = document.querySelectorAll('.parallax');
+            const scrollTop = window.pageYOffset;
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.1;
+                const yPos = -(scrollTop * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        }
+
+        // Enhanced Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .fade-slide, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Scroll Event Listeners
+        let ticking = false;
+        
+        function handleScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateScrollProgress();
+                    handleHeaderReveal();
+                    highlightActiveSection();
+                    handleParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Smooth Scrolling Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced Condition Cards with smooth animations
+        document.querySelectorAll('.condition-card').forEach(card => {
+            const toggle = card.querySelector('.condition-toggle');
+            
+            function toggleCard() {
+                const isExpanded = card.classList.contains('expanded');
+                
+                // Add smooth transition class
+                card.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                
+                card.classList.toggle('expanded');
+                
+                // Animate the toggle button
+                toggle.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            }
+
+            card.addEventListener('click', (e) => {
+                if (e.target === toggle) return;
+                toggleCard();
+            });
+
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleCard();
+            });
+        });
+
+        // Enhanced Search with animations
+        const searchInput = document.getElementById('disorder-search');
+        const searchResults = document.getElementById('search-results');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                document.querySelectorAll('.condition-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.3s ease forwards';
+                    }, index * 50);
+                });
+                searchResults.textContent = '';
+                return;
+            }
+
+            let visibleCount = 0;
+            const matchedDisorders = [];
+
+            document.querySelectorAll('.condition-card').forEach((card, index) => {
+                const conditionName = card.getAttribute('data-condition');
+                const conditionTitle = card.querySelector('h4').textContent.toLowerCase();
+                
+                if (conditionName.includes(searchTerm) || conditionTitle.includes(searchTerm)) {
+                    setTimeout(() => {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.3s ease forwards';
+                    }, index * 50);
+                    visibleCount++;
+                    matchedDisorders.push(card.querySelector('h4').textContent);
+                } else {
+                    card.style.animation = 'fadeOutDown 0.2s ease forwards';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 200);
+                }
+            });
+
+            // Animate search results
+            setTimeout(() => {
+                if (visibleCount === 0) {
+                    searchResults.textContent = 'No disorders found matching your search.';
+                } else if (visibleCount === 1) {
+                    searchResults.textContent = `Found 1 disorder: ${matchedDisorders[0]}`;
+                } else {
+                    searchResults.textContent = `Found ${visibleCount} disorders: ${matchedDisorders.join(', ')}`;
+                }
+                searchResults.style.animation = 'fadeIn 0.3s ease forwards';
+            }, 300);
+        });
+
+        // Add CSS animations for search
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes fadeOutDown {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-20px); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial header state
+            handleHeaderReveal();
+            
+            // Add loading animation to cards
+            document.querySelectorAll('.about-card, .condition-card, .therapist-card, .therapy-service-card, .process-step, .why-choose-item, .resource-card, .testimonial-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

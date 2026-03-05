@@ -7,7 +7,7 @@ import Home from './pages/home/Home'
 import About from './pages/About'
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
-import bikeImage from "./assets/images/download.png";
+// import bikeImage from "./assets/images/download.png";
 
 
 

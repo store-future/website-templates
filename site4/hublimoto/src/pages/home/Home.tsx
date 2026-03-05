@@ -1,9 +1,9 @@
 import Banner from "../../components/HomeSections/Banner/Banner";
 import Whatsnew from "../../components/HomeSections/whatsnew/Whatsnew";
 import Discover from "../../components/HomeSections/discover/Discover";
-import Selecttype from "../../components/HomeSections/Selecttype/Selecttype";
+import Selecttype from "../../components/HomeSections/selecttype/Selecttype";
 import Allbike from "../../components/HomeSections/allbike/Allbike";
-import bikeImage from "../../assets/images/download.png";
+// import bikeImage from "../../assets/images/download.png";
 
 
 
@@ -16,7 +16,7 @@ function Home() {
       <Discover />
       <Whatsnew />
 
-      <img src={bikeImage} className="logo" alt="Vite logo" />
+      {/* <img src={bikeImage} className="logo" alt="Vite logo" /> */}
 
     </>
   );

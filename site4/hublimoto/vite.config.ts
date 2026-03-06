@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/website-templates/site4/'
+  base: '/website-templates/site4/hublimoto/dist/',
 })

@@ -16,7 +16,7 @@ function App() {
     // <h1>Hublimoto</h1>
     // <img src={bikeImage} className="logo" alt="Vite logo" />
   
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

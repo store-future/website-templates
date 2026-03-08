@@ -1,7 +1,6 @@
 .section-heading {
   text-align: center;
   margin: 50px;
-  
 }
 
 .section-heading h1 {
@@ -11,7 +10,6 @@
   letter-spacing: 2px;
   position: relative;
   display: inline-block;
-  /* font-family: "Krona One"; */
 }
 
 .section-heading h1::after {
@@ -25,91 +23,273 @@
   background: #003399;
 }
 
-
-/* ------------------------------------------------------------------------------------- */
-
-
-.whatsnew {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.card {
+.carousel-container {
   position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  aspect-ratio: 16/10;
-}
-
-.card img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s;
-}
-
-.card:hover img {
-  transform: scale(1.05);
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 51, 153, 0.85);
+  max-width: 1200px;
+  margin: 60px auto;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  transform: translateY(100%);
-  transition: transform 0.5s ease;
+  justify-content: center;
+  padding: 40px 0;
+  overflow: hidden;
 }
 
-.card:hover .overlay {
-  transform: translateY(0);
+.carousel-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  position: relative;
+  height: 400px;
 }
 
-.overlay p {
-  color: #fff;
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.carousel-item {
+  position: absolute;
+  transition: none;
 }
 
-.overlay h2 {
-  color: #fff;
-  font-size: 28px;
-  margin-bottom: 20px;
-  font-weight: 700;
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
-.overlay button {
-  background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-  padding: 12px 30px;
-  font-size: 14px;
+.carousel-item h3 {
+  text-align: center;
+  padding: 15px;
+  font-size: 20px;
   font-weight: 600;
-  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+.carousel-item.left {
+  left: 5%;
+  width: 250px;
+  opacity: 0.5;
+  transform: scale(0.75);
+  z-index: 1;
+}
+
+.carousel-item.center {
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  width: 400px;
+  opacity: 1;
+  z-index: 3;
+}
+
+.carousel-item.right {
+  right: 5%;
+  width: 250px;
+  opacity: 0.5;
+  transform: scale(0.75);
+  z-index: 1;
+}
+
+.carousel-item.incoming-right {
+  right: -25%;
+  width: 250px;
+  opacity: 0;
+  transform: scale(0.65);
+  z-index: 0;
+  animation: slideInFromRight 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.carousel-item.incoming-left {
+  left: -25%;
+  width: 250px;
+  opacity: 0;
+  transform: scale(0.65);
+  z-index: 0;
+  animation: slideInFromLeft 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Slide Left Animation (Next button) */
+.carousel-item.left.slide-left {
+  animation: slideLeftToOut 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.carousel-item.center.slide-left {
+  animation: slideCenterToLeft 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.carousel-item.right.slide-left {
+  animation: slideRightToCenter 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Slide Right Animation (Prev button) */
+.carousel-item.left.slide-right {
+  animation: slideLeftToCenter 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.carousel-item.center.slide-right {
+  animation: slideCenterToRight 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.carousel-item.right.slide-right {
+  animation: slideRightToOut 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideRightToCenter {
+  from {
+    right: 5%;
+    left: auto;
+    width: 250px;
+    opacity: 0.5;
+    transform: scale(0.75);
+    z-index: 1;
+  }
+  to {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scale(1);
+    width: 400px;
+    opacity: 1;
+    z-index: 3;
+  }
+}
+
+@keyframes slideCenterToLeft {
+  from {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    width: 400px;
+    opacity: 1;
+    z-index: 3;
+  }
+  to {
+    left: 5%;
+    transform: scale(0.75);
+    width: 250px;
+    opacity: 0.5;
+    z-index: 1;
+  }
+}
+
+@keyframes slideLeftToOut {
+  0% {
+    left: 5%;
+    width: 250px;
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+  100% {
+    left: -25%;
+    width: 250px;
+    opacity: 0;
+    transform: scale(0.65);
+  }
+}
+
+@keyframes slideLeftToCenter {
+  from {
+    left: 5%;
+    width: 250px;
+    opacity: 0.5;
+    transform: scale(0.75);
+    z-index: 1;
+  }
+  to {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    width: 400px;
+    opacity: 1;
+    z-index: 3;
+  }
+}
+
+@keyframes slideCenterToRight {
+  from {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    width: 400px;
+    opacity: 1;
+    z-index: 3;
+  }
+  to {
+    right: 5%;
+    left: auto;
+    transform: scale(0.75);
+    width: 250px;
+    opacity: 0.5;
+    z-index: 1;
+  }
+}
+
+@keyframes slideRightToOut {
+  0% {
+    right: 5%;
+    width: 250px;
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+  100% {
+    right: -25%;
+    width: 250px;
+    opacity: 0;
+    transform: scale(0.65);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    right: -25%;
+    width: 250px;
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  100% {
+    right: 5%;
+    width: 250px;
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    left: -25%;
+    width: 250px;
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  100% {
+    left: 5%;
+    width: 250px;
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+}
+
+.carousel-btn {
+  position: absolute;
+  background: #003399;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 32px;
   cursor: pointer;
-  transition: all 0.3s;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.overlay button:hover {
-  background: #fff;
-  color: #003399;
+.carousel-btn:hover {
+  background: #0044cc;
+  transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
-  .whatsnew {
-    grid-template-columns: 1fr;
-  }
-  
-  .section-heading h1 {
-    font-size: 32px;
-  }
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
 }

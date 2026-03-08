@@ -1,10 +1,31 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logos/yamaha_logo-black.webp";    
 
 function Navbar() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <header className="navbar">
+    <header className={`navbar ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="nav-container">
 
         {/* Logo */}

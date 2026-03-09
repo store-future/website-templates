@@ -3,6 +3,7 @@ import Whatsnew from "../../components/HomeSections/whatsnew/Whatsnew";
 import Discover from "../../components/HomeSections/discover/Discover";
 import Selecttype from "../../components/HomeSections/selecttype/Selecttype";
 import Allbike from "../../components/HomeSections/allbike/Allbike";
+import Highlight from "../../components/HomeSections/highlight/Highlight";
 // import bikeImage from "../../assets/images/download.png";
 
 
@@ -12,6 +13,7 @@ function Home() {
     <>
       <Banner />
       <Allbike />
+      <Highlight />
       <Selecttype />
       <Discover />
       <Whatsnew />

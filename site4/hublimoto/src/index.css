@@ -68,7 +68,6 @@ button:focus-visible {
 } */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
 /* Reset */
 * {
   margin: 0;
@@ -76,8 +75,11 @@ button:focus-visible {
   box-sizing: border-box;
 }
 
+/* Page background */
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color: #f8f8f6; /* off white instead of pure white */
+  color: #1a1a1a;
 }
 
 /* Global Container */

@@ -1,7 +1,7 @@
 import Banner from "../../components/HomeSections/Banner/Banner";
 import Whatsnew from "../../components/HomeSections/whatsnew/Whatsnew";
 import Discover from "../../components/HomeSections/discover/Discover";
-import Bikecarousal from "../../components/HomeSections/selecttype_copy/Selecttype";
+// import Bikecarousal from "../../components/HomeSections/selecttype_copy/Selecttype";
 import Product from "../../components/HomeSections/product/Product";
 import Allbike from "../../components/HomeSections/allbike/Allbike";
 import Highlight from "../../components/HomeSections/highlight/Highlight";
@@ -14,10 +14,10 @@ function Home() {
   return (
     <>
       <Banner />
+      <Product />
       <Allbike />
       <Highlight />
-      <Product />
-      <Bikecarousal />
+      {/* <Bikecarousal /> */}
       <Discover />
       <Whatsnew />
 

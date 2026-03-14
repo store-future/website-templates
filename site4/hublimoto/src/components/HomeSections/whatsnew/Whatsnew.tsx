@@ -1,17 +1,12 @@
-import "./Whatsnew.css";
-// import card1 from "../../../assets/images/xsr_black-pc.webp";
-// import card2 from "../../../assets/images/xsr_silver_price-award-pc.webp";
-// import card3 from "../../../assets/images/xsr_black-pc.webp";
-// import card4 from "../../../assets/images/xsr_black-pc.webp";
-
 function Whatsnew() {
   return (
     <>
-      <div className="section-heading">
-          <h1>What's New</h1>
+      <div className="text-center my-12">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-wide relative inline-block text-gray-900">
+          What's New
+          <span className="absolute left-1/2 -bottom-3 -translate-x-1/2 w-20 h-1 bg-blue-900"></span>
+        </h1>
       </div>
-    
-
     </>
   );
 }

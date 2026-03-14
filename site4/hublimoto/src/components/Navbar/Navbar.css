@@ -1,5 +1,4 @@
 
-
 /* NAVBAR */
 .navbar {
   position: fixed;
@@ -8,7 +7,7 @@
   height: 70px;
   background: #ffffff;
   border-bottom: 1px solid #eee;
-  z-index: 1000;
+  z-index: 1001;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -77,4 +76,201 @@
 
 .nav-links li:hover a::after {
   width: 100%;
+}
+
+/* MEGA MENU */
+.mega-menu {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 420px;
+  background: #faf9f7;
+  border-top: 2px solid #d10000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  z-index: 1001;
+  overflow: hidden;
+  animation: megaFadeIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mega-backdrop {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 999;
+  animation: backdropFadeIn 0.28s ease;
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes megaFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Left sidebar — blends with off-white theme */
+.mega-sidebar {
+  width: 180px;
+  min-width: 180px;
+  background: #ff0100;
+  display: flex;
+  flex-direction: column;
+  padding: 70px 0;
+  gap: 2px;
+}
+
+.mega-sub-btn {
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  color: #c9bfb5;
+  padding: 12px 28px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.mega-sub-btn:hover,
+.mega-sub-btn.active {
+  background: #4e4540;
+  color: #faf9f7;
+  border-left-color: #d10000;
+}
+
+/* Level 2 sub-sidebar — series list (R-Series, MT-Series etc.) */
+.mega-subsidebar {
+  width: 160px;
+  min-width: 160px;
+  background: #3a3330;
+  display: flex;
+  flex-direction: column;
+  padding: 70px 0;
+  gap: 2px;
+}
+
+.mega-subsub-btn {
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  color: #a09890;
+  padding: 11px 22px;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.mega-subsub-btn:hover,
+.mega-subsub-btn.active {
+  background: #2a2320;
+  color: #faf9f7;
+  border-left-color: #d10000;
+}
+
+/* Right panel */
+.mega-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 40px;
+  overflow-y: auto;
+  background: #faf9f7;
+}
+
+.mega-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d10000;
+  margin: 0 0 20px 0;
+}
+
+/* Smooth content transition */
+.mega-content {
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.content-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.content-hidden {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+/* Bikes grid */
+.mega-bikes {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.mega-bike-card {
+  width: 160px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mega-bike-card:hover {
+  transform: translateY(-4px);
+}
+
+.mega-bike-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.mega-bike-card p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  margin-top: 8px;
+}
+
+/* Links list for Service / Dealers / Parts / Events */
+.mega-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mega-links-list li a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  padding: 8px 14px;
+  display: block;
+  border-left: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  border-radius: 0 4px 4px 0;
+}
+
+.mega-links-list li a:hover {
+  color: #d10000;
+  border-left-color: #d10000;
+  background: #f0e8e8;
 }

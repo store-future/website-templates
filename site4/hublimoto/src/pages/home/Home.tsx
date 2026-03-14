@@ -12,18 +12,37 @@ import Highlight from "../../components/HomeSections/highlight/Highlight";
 
 function Home() {
   return (
-    <>
+    <main>
       <Banner />
-      <Product />
-      <Allbike />
-      <Highlight />
-      {/* <Bikecarousal /> */}
-      <Discover />
-      <Whatsnew />
 
-      {/* <img src={bikeImage} className="logo" alt="Vite logo" /> */}
+      <section className="page-section surface" id="product">
+        <div className="container">
+          <Product />
+        </div>
+      </section>
 
-    </>
+      <section className="page-section" id="all-bikes">
+        <div className="container">
+          <Allbike />
+        </div>
+      </section>
+
+      <section className="page-section surface" id="highlights">
+        <Highlight />
+      </section>
+
+      <section className="page-section" id="discover">
+        <div className="container">
+          <Discover />
+        </div>
+      </section>
+
+      <section className="page-section surface" id="whats-new">
+        <div className="container">
+          <Whatsnew />
+        </div>
+      </section>
+    </main>
   );
 }
 

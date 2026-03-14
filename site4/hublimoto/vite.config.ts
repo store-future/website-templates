@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/website-templates/site4/hublimoto/dist/',
+  // Set this to '/<github-repo-name>/' for GitHub Pages
+  // Example if your repo is named "hublimoto": base: '/hublimoto/'
+  base: '/hublimoto/',
 
 })

@@ -71,9 +71,6 @@
 
 
 /* ------------------------------------------------------------------------------------- */
-
-
-
 .highlight-video-section {
   background: #000;
   display: flex;
@@ -123,7 +120,6 @@
   height: 600px;
   gap: 0;
   background: #212121;
-  margin-bottom:150px
 }
 
 .split-layout {
@@ -134,7 +130,7 @@
   overflow: hidden;
   transition: all 0.6s ease;
   background: #1a1a1a;
-  border-right: 1px solid #333;
+  border-right: 1px solid #ff5a91;
   position: relative;
   cursor: pointer;
 }
@@ -145,7 +141,7 @@
 
 .split-layout:hover {
   flex: 3;
-  box-shadow: 0 0 40px rgba(51, 51, 51, 0.4);
+  box-shadow: 0 0 40px rgba(255, 90, 145, 0.4);
   z-index: 10;
 }
 
@@ -153,12 +149,7 @@
   flex: 1;
   position: relative;
   overflow: hidden;
-  height: 100%;
-  transition: height 0.6s ease;
-}
-
-.split-layout:hover .split-right {
-  height: 75%;
+  height: 85%;
 }
 
 .split-right img {
@@ -179,14 +170,12 @@
   position: relative;
   background: rgba(26, 26, 26, 0.95);
   color: white;
-  padding: 0;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: 2px solid #333;
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
+  border-top: 2px solid #ff5a91;
+  height: 15%;
   transition: all 0.6s ease;
 }
 
@@ -194,11 +183,25 @@
   height: 25%;
   padding: 30px 40px;
   background: rgba(26, 26, 26, 0.98);
-  opacity: 1;
 }
 
 .split-left-collapsed {
-  display: none;
+  text-align: center;
+  transition: all 0.5s ease;
+  opacity: 1;
+}
+
+.split-left-collapsed span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ff568e;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.split-layout:hover .split-left-collapsed {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 .split-left-content {
@@ -216,7 +219,7 @@
 
 .location-year {
   font-size: 10px;
-  color: #999;
+  color: #ff568e;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 600;
@@ -242,7 +245,7 @@
 
 .split-name {
   font-size: 10px;
-  color: #999;
+  color: #ff568e;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;

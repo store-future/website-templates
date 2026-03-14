@@ -71,9 +71,6 @@
 
 
 /* ------------------------------------------------------------------------------------- */
-
-
-
 .highlight-video-section {
   background: #000;
   display: flex;
@@ -117,88 +114,47 @@
 
 
 
-.highlight-cards-container {
-  display: flex;
-  width: 100%;
-  height: 600px;
-  gap: 0;
-  background: #212121;
-  margin-bottom:150px
-}
-
 .split-layout {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 100%;
+  height: 100px;
   overflow: hidden;
-  transition: all 0.6s ease;
-  background: #1a1a1a;
-  border-right: 1px solid #333;
+  border-radius: 0;
+  box-shadow: none;
+  transition: all 0.5s ease;
+  background: #212121;
+  border: 1px solid #ff5a91;
   position: relative;
   cursor: pointer;
 }
 
-.split-layout:last-child {
-  border-right: none;
-}
-
 .split-layout:hover {
-  flex: 3;
-  box-shadow: 0 0 40px rgba(51, 51, 51, 0.4);
+  height: 500px;
+  box-shadow: 0 8px 25px rgba(255, 90, 145, 0.3);
   z-index: 10;
 }
 
-.split-right {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  transition: height 0.6s ease;
-}
-
-.split-layout:hover .split-right {
-  height: 75%;
-}
-
-.split-right img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease;
-  filter: brightness(0.8);
-}
-
-.split-layout:hover .split-right img {
-  transform: scale(1.1);
-  filter: brightness(1);
-}
-
 .split-left {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: rgba(26, 26, 26, 0.95);
   color: white;
-  padding: 0;
+  padding: 20px 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: 2px solid #333;
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.6s ease;
+  border-top: 2px solid #ff5a91;
+  z-index: 2;
+  height: 100px;
+  transition: all 0.5s ease;
 }
 
 .split-layout:hover .split-left {
-  height: 25%;
-  padding: 30px 40px;
+  height: 250px;
   background: rgba(26, 26, 26, 0.98);
-  opacity: 1;
-}
-
-.split-left-collapsed {
-  display: none;
 }
 
 .split-left-content {
@@ -214,38 +170,78 @@
   pointer-events: auto;
 }
 
+.split-left-collapsed {
+  text-align: center;
+  transition: all 0.5s ease;
+  opacity: 1;
+}
+
+.split-left-collapsed span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff568e;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.split-layout:hover .split-left-collapsed {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 .location-year {
-  font-size: 10px;
-  color: #999;
+  font-size: 11px;
+  color: #ff568e;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .split-heading {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.5px;
-  margin-bottom: 8px;
-  line-height: 1.2;
+  margin-bottom: 12px;
 }
 
 .split-subheading {
-  font-size: 12px;
+  font-size: 14px;
   color: #ccc;
-  line-height: 1.5;
-  letter-spacing: 0.3px;
-  margin-bottom: 8px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
 }
 
 .split-name {
-  font-size: 10px;
-  color: #999;
+  font-size: 12px;
+  color: #ff568e;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.split-right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.split-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.split-layout:hover .split-right img {
+  transform: scale(1.1);
 }
 
 @media (max-width: 992px) {

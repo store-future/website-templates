@@ -6,7 +6,7 @@ import Product from "../../components/HomeSections/product/Product";
 import Allbike from "../../components/HomeSections/allbike/Allbike";
 import Highlight from "../../components/HomeSections/highlight/Highlight";
 import TechnologySection from "../../components/HomeSections/TechnologySection";
-
+import AboutSection from "../../components/HomeSections/about/AboutSection";
 // import bikeImage from "../../assets/images/download.png";
 
 
@@ -17,6 +17,7 @@ function Home() {
       <Banner />
       <Product />
       <Allbike />
+      <AboutSection />
       <Highlight />
       <Whatsnew />
       <TechnologySection/>

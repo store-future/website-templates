@@ -1,115 +1,261 @@
-.section-heading {
-  text-align: center;
-  margin: 50px;
-  
+/* ── Section ── */
+.disc-section {
+  padding: 100px 0 0;
 }
 
-.section-heading h1 {
-  font-size: 48px;
+/* ── Heading ── */
+.disc-heading {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 0 56px;
+}
+
+.disc-heading-left {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.disc-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
   font-weight: 700;
-  color: #1a1a1a;
-  letter-spacing: 2px;
-  position: relative;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #003399;
+}
+
+.disc-eyebrow-line {
   display: inline-block;
-  /* font-family: "Krona One"; */
-}
-
-.section-heading h1::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
+  width: 30px;
+  height: 2px;
   background: #003399;
+  flex-shrink: 0;
 }
 
+.disc-title {
+  font-size: 58px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1;
+}
 
-/* ------------------------------------------------------------------------------------- */
+.disc-title-accent {
+  background: linear-gradient(120deg, #003399 0%, #0055ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
+.disc-heading-divider {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #003399, transparent);
+  opacity: 0.2;
+  margin: 0 40px;
+}
 
-.whatsnew {
+.disc-heading-right {
+  flex-shrink: 0;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.disc-heading-right strong {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 0;
+  margin-right: 4px;
+}
+
+/* ── Grid ── */
+.disc-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  background: #1a1a1a;
 }
 
-.card {
+/* ── Card ── */
+.disc-card {
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   aspect-ratio: 16/10;
+  cursor: pointer;
+  background: #111;
 }
 
-.card img {
+.disc-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  filter: brightness(0.75);
 }
 
-.card:hover img {
-  transform: scale(1.05);
+.disc-card:hover img {
+  transform: scale(1.07);
+  filter: brightness(0.45);
 }
 
-.overlay {
+/* always-visible bottom gradient */
+.disc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    transparent 70%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* animated left accent bar */
+.disc-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  height: 0%;
+  background: #003399;
+  z-index: 3;
+  transition: height 0.4s ease;
+}
+
+.disc-card:hover::after {
+  height: 100%;
+}
+
+/* ── Badge ── */
+.disc-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  background: #003399;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+}
+
+/* ── Card info (always visible) ── */
+.disc-info {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 51, 153, 0.85);
+  right: 0;
+  z-index: 2;
+  padding: 28px 28px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(100%);
-  transition: transform 0.5s ease;
+  gap: 6px;
 }
 
-.card:hover .overlay {
+.disc-model {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.disc-name {
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* hover-reveal content */
+.disc-hover {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.disc-card:hover .disc-hover {
+  opacity: 1;
   transform: translateY(0);
 }
 
-.overlay p {
-  color: #fff;
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.disc-specs {
+  display: flex;
+  gap: 18px;
 }
 
-.overlay h2 {
-  color: #fff;
-  font-size: 28px;
-  margin-bottom: 20px;
-  font-weight: 700;
+.disc-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.overlay button {
-  background: transparent;
-  border: 2px solid #fff;
+.disc-spec-val {
+  font-size: 15px;
+  font-weight: 800;
   color: #fff;
-  padding: 12px 30px;
-  font-size: 14px;
+  line-height: 1;
+}
+
+.disc-spec-key {
+  font-size: 9px;
   font-weight: 600;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.disc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 10px 18px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: background 0.3s, border-color 0.3s, gap 0.3s;
+  white-space: nowrap;
 }
 
-.overlay button:hover {
-  background: #fff;
-  color: #003399;
+.disc-btn:hover {
+  background: #003399;
+  border-color: #003399;
+  gap: 14px;
 }
 
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .whatsnew {
+  .disc-grid {
     grid-template-columns: 1fr;
   }
-  
-  .section-heading h1 {
-    font-size: 32px;
+
+  .disc-title {
+    font-size: 38px;
   }
 }

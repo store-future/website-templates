@@ -1,6 +1,8 @@
 import "./Highlight.css";
 import trackVideo from "../../../assets/video/Yamaha Coimbatore Track Day.mp4";
-
+import banner1 from "../../../assets/images/banner3.jpg";
+import banner2 from "../../../assets/images/banner7.jpg";
+import banner3 from "../../../assets/images/banner4.jpg";
 function Highlight() {
   return (
     <>
@@ -18,7 +20,7 @@ function Highlight() {
         <div className="split-layout">
           <div className="split-right">
             <img
-              src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800"
+              src={banner1}
               alt="Yamaha R15"
             />
           </div>
@@ -43,7 +45,7 @@ function Highlight() {
         <div className="split-layout">
           <div className="split-right">
             <img
-              src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800"
+              src={banner2}
               alt="Yamaha MT15"
             />
           </div>
@@ -68,7 +70,7 @@ function Highlight() {
         <div className="split-layout">
           <div className="split-right">
             <img
-              src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800"
+              src={banner3}
               alt="Yamaha R7"
             />
           </div>

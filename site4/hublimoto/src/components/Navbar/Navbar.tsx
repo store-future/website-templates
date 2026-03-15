@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./Navbar.css";
-import logo from "../../assets/logos/yamaha_logo-black.webp";
+import logo from "../../assets/logos/brand-logo.webp";
 import card1 from "../../assets/images/download.png";
 import card2 from "../../assets/images/download1.png";
 import card3 from "../../assets/images/download2.webp";
@@ -89,6 +89,7 @@ const NAV_ITEMS = ["Home", "Products", "Dealers", "Service", "Parts", "Events", 
 function Navbar() {
   const [isVisible, setIsVisible]           = useState(true);
   const [lastScrollY, setLastScrollY]       = useState(0);
+  const [isScrolled, setIsScrolled]         = useState(false);
   const [activeNav, setActiveNav]           = useState<string | null>(null);
   const [activeSidebar, setActiveSidebar]   = useState<string>("");
   const [activeSub, setActiveSub]           = useState<string>("");
@@ -98,6 +99,7 @@ function Navbar() {
     const handleScroll = () => {
       const y = window.scrollY;
       setIsVisible(!(y > lastScrollY && y > 100));
+      setIsScrolled(y > 10);
       setLastScrollY(y);
     };
     window.addEventListener("scroll", handleScroll);
@@ -146,7 +148,7 @@ function Navbar() {
 
   return (
     <>
-      <header className={`navbar ${isVisible ? "visible" : "hidden"}`}>
+      <header className={`navbar ${isVisible ? "visible" : "hidden"} ${isScrolled ? "scrolled" : ""}`}>
         <div className="nav-container">
           <div className="logo">
             <Link to="/"><img src={logo} alt="Yamaha Logo" /></Link>

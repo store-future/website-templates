@@ -40,15 +40,15 @@ function TechnologySection() {
 
         <div className="relative group">
 
+          {/* Glow effect */}
+
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-violet-400 opacity-30 blur-2xl rounded-xl group-hover:opacity-60 transition"></div>
+
           <img
             src={techImg}
             alt="Bike Technology"
-            className="rounded-xl shadow-2xl transform group-hover:scale-105 transition duration-500"
+            className="relative rounded-xl shadow-2xl transform group-hover:scale-105 transition duration-500"
           />
-
-          {/* Glow effect */}
-
-          <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-400 opacity-20 blur-2xl rounded-xl group-hover:opacity-40 transition"></div>
 
         </div>
 

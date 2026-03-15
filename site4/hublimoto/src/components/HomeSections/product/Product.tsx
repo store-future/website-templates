@@ -11,10 +11,15 @@ function Product() {
  
   return (
     <>
-      <div className="product-section-heading">
-        <h1>Discover the power</h1>
+    <div className="wn-section">
+
+      <div className="wn-header">
+        <div className="wn-eyebrow">Explore Special Programs</div>
+        <div className="wn-title">Make The Most <span>Of Yamaha</span></div>
       </div>
 
+   
+    </div>
       {/* <div ClassName="carousel-container">
         <img src={bikewithmen} alt="Bike" className="section-image" />
       </div> */}

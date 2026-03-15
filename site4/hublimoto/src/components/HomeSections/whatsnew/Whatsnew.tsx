@@ -1,48 +1,59 @@
 import "./Whatsnew.css";
-import card1 from "../../../assets/images/xsr_black-pc.webp";
-import card2 from "../../../assets/images/xsr_silver_price-award-pc.webp";
-import card3 from "../../../assets/images/banner1.jpg";
+import r3Video from "../../../assets/video/R3.mp4";
+import trackVideo from "../../../assets/video/Yamaha Coimbatore Track Day.mp4";
+import img1 from "../../../assets/images/xsr_black-pc.webp";
+import img2 from "../../../assets/images/R15-S.png.webp";
+import img3 from "../../../assets/images/xsr_silver_price-award-pc.webp";
+import img4 from "../../../assets/images/download2.webp";
+
+const cards = [
+  { image: img1, tag: "New Launch", title: "XSR 900", sub: "Neo-Retro Sport", desc: "Torque-rich CP3 engine meets timeless design." },
+  { image: img2, tag: "Best Seller", title: "YZF-R15", sub: "Supersport 155cc", desc: "Track-bred DNA in an everyday machine." },
+  { image: img3, tag: "Limited", title: "XSR Silver", sub: "Award Edition", desc: "Iconic silver livery. Collector's pride." },
+  { image: img4, tag: "Adventure", title: "Ténéré 700", sub: "Rally Replica", desc: "Dakar spirit. Road-legal freedom." },
+];
 
 function Whatsnew() {
   return (
-    <div className="wn-section">
-      <div className="container">
+    <section className="whatsnew__section">
 
-        <div className="wn-heading">
-          <div className="wn-heading-left">
-            <span className="wn-eyebrow">
-              <span className="wn-eyebrow-line" />
-              2025 Collection
-            </span>
-            <h1 className="wn-title">
-              What's <span className="wn-title-accent">New</span>
-            </h1>
-          </div>
-          <div className="wn-heading-center">
-            <div className="wn-divider" />
-          </div>
-          <div className="wn-heading-right">
-            <p className="wn-subtitle">Engineered for performance,<br />built for the road.</p>
-            <span className="wn-count">
-              <strong>03</strong> New Models
-            </span>
-          </div>
-        </div>
-
-        <div className="whatsnew-diagonal">
-          <div className="wn-left" style={{ backgroundImage: `url(${card1})`, backgroundPosition: "center center" }}>
-            <div className="wn-label">Sport Series</div>
-          </div>
-          <div className="wn-right-top" style={{ backgroundImage: `url(${card2})`, backgroundPosition: "top center" }}>
-            <div className="wn-label">Headlight</div>
-          </div>
-          <div className="wn-right-bottom" style={{ backgroundImage: `url(${card3})`, backgroundPosition: "bottom center" }}>
-            <div className="wn-label">Tyre</div>
-          </div>
-        </div>
-
+      {/* Left video strip */}
+      <div className="whatsnew__video-strip whatsnew__video-left">
+        <video src={r3Video} autoPlay muted loop playsInline />
+        <div className="whatsnew__video-label">R3 · Pure Sport</div>
       </div>
-    </div>
+
+      {/* Main content */}
+      <div className="whatsnew__main">
+        <div className="whatsnew__header">
+          <span className="whatsnew__eyebrow">WHAT'S NEW</span>
+          <h2 className="whatsnew__heading">Latest from Yamaha</h2>
+          <p className="whatsnew__subtitle">Discover the newest machines, editions and stories from the world of Yamaha.</p>
+        </div>
+
+        <div className="whatsnew__grid">
+          {cards.map((c) => (
+            <div className="whatsnew__card" key={c.title} style={{ backgroundImage: `url(${c.image})` }}>
+              <div className="whatsnew__card-overlay" />
+              <span className="whatsnew__card-tag">{c.tag}</span>
+              <div className="whatsnew__card-body">
+                <p className="whatsnew__card-sub">{c.sub}</p>
+                <h3 className="whatsnew__card-title">{c.title}</h3>
+                <p className="whatsnew__card-desc">{c.desc}</p>
+                <button className="whatsnew__card-btn">Explore →</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right video strip */}
+      <div className="whatsnew__video-strip whatsnew__video-right">
+        <video src={trackVideo} autoPlay muted loop playsInline />
+        <div className="whatsnew__video-label">Track Day · Coimbatore</div>
+      </div>
+
+    </section>
   );
 }
 

@@ -1,10 +1,11 @@
 import './Footer.css'
-import yamahaLogo from '../assets/logos/yamaha_logo-black.webp'
+import yamahaLogo from '../assets/logos/brand-logo.webp'
 
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-grid">
+      <div className="footer-container">
+        <div className="footer-grid">
 
         {/* ── LEFT — Logo + About ── */}
         <div className="footer-col footer-left">
@@ -50,8 +51,8 @@ function Footer() {
             </div>
             <div className="footer-location-text">
               <strong>Yamaha Motor India Pvt. Ltd.</strong>
-              Surajpur Kasna Road, Greater Noida<br />
-              Uttar Pradesh — 201 306
+              Opposite the Urban Oasis Mall on Airport Road,  <br />
+              Hubli, Karnataka — 201 306
             </div>
           </div>
 
@@ -81,15 +82,6 @@ function Footer() {
           </div>
         </div>
 
-      </div>
-
-      {/* ── Bottom Bar ── */}
-      <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Yamaha Motor India. All rights reserved.</p>
-        <div className="footer-bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Cookie Settings</a>
         </div>
       </div>
     </footer>

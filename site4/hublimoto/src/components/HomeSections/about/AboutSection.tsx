@@ -16,7 +16,7 @@ function AboutSection() {
             <img src={imgMain} alt="Hublimoto workshop" className="about-img-main" />
             <img src={imgOverlap} alt="Bike" className="about-img-overlap" />
             <div className="about-badge">
-              <span className="about-badge-num">20+</span>
+              <span className="about-badge-num">13+</span>
               <span className="about-badge-text">Years of<br />Experience</span>
             </div>
           </div>
@@ -41,7 +41,7 @@ function AboutSection() {
 
             <div className="about-stats">
               <div>
-                <span className="about-stat-num">20+</span>
+                <span className="about-stat-num">13+</span>
                 <span className="about-stat-label">Years Active</span>
               </div>
               <div>
@@ -49,7 +49,7 @@ function AboutSection() {
                 <span className="about-stat-label">Models Built</span>
               </div>
               <div>
-                <span className="about-stat-num">120k</span>
+                <span className="about-stat-num">113k</span>
                 <span className="about-stat-label">Happy Riders</span>
               </div>
             </div>

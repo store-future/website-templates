@@ -1,130 +1,163 @@
-.product-section-heading {
-  text-align: center;
-  margin: 50px;
-}
-
-.product-section-heading h1 {
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: 2px;
+/* ══════════════════════════════════════
+   wn-section  —  dark header block
+══════════════════════════════════════ */
+.wn-section {
+  background: #0a0a0a;
+  padding: 30px 0 0;
+  overflow: hidden;
+  /* margin-top: -60px;
   position: relative;
-  display: inline-block;
+  z-index: 2;
+  clip-path: polygon(0 1px, 45% 0, 100% 0, 100% 100%, 0 100%); */
 
-  /* Gradient text */
-  background: linear-gradient(90deg,#111,#003399,#111);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* subtle glow */
-  text-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-/* animated underline */
-.product-section-heading h1::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg,#003399,#0066ff,#003399);
-  border-radius: 3px;
-
-  transition: width 0.4s ease;
+.wn-header {
+  padding: 0 80px 50px;
 }
 
-/* hover effect */
-.product-section-heading h1:hover::after{
-  width:120px;
+.wn-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #0066ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
 
+.wn-eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background: #0066ff;
+  flex-shrink: 0;
+}
+
+.wn-title {
+  font-size: 52px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.wn-title span {
+  color: #0066ff;
+}
+
+/* ══════════════════════════════════════
+   hero-section  —  split light / dark
+══════════════════════════════════════ */
 .hero-section {
   width: 100%;
   height: 700px;
   position: relative;
-  /* overflow: hidden; */
 }
 
+/* ── top light half ── */
 .top-content {
   width: 100%;
-  height: 60%;
+  height: 55%;
   display: flex;
   align-items: center;
-  padding: 50px 100px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 0 80px;
+  background: #f4f4f2;
+  position: relative;
+  z-index: 1;
+}
+
+/* diagonal bottom edge on top-content */
+.top-content::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #f4f4f2;
+  clip-path: polygon(0 0, 55% 0%, 10% 100%, 0 100%);
+  z-index: 2;
 }
 
 .text-area {
-  max-width: 500px;
+  max-width: 480px;
   animation: fadeInLeft 0.8s ease-out;
+  position: relative;
+  z-index: 3;
 }
 
 .text-area h2 {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 52px;
+  font-weight: 900;
   color: #1a1a1a;
-  margin-bottom: 20px;
-  line-height: 1.2;
+  margin: 0 0 18px;
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+
+.text-area h2 span {
+  color: #0066ff;
 }
 
 .text-area p {
-  font-size: 18px;
+  font-size: 16px;
   color: #555;
-  line-height: 1.6;
-  margin-bottom: 30px;
-  padding-left: 25px;
-  position : relative; 
+  line-height: 1.75;
+  margin: 0;
+  padding-left: 20px;
+  position: relative;
 }
 
-.text-area p::before{
+.text-area p::before {
   content: "";
   position: absolute;
   left: 0;
   top: 4px;
-  width: 4px;
-  height: 90%;
-  background: #003399;
-  border-radius: 3px;
+  width: 3px;
+  height: 88%;
+  background: #0066ff;
 }
 
-
-
-
-
+/* ── bottom dark half ── */
 .black-area {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 50%;
-  background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);
+  height: 52%;
+  background: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 70px;
+  padding: 0 80px;
+  z-index: 0;
 }
 
+/* ── spec cards ── */
 .spec-cards {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   z-index: 1;
-  max-width: 50%;
-  animation: fadeInUp 1s ease-out 0.5s both;
+  animation: fadeInUp 1s ease-out 0.4s both;
 }
 
 .spec-card {
   position: relative;
-  padding: 35px 30px;
-  background: rgba(10, 10, 10, 0.8);
-  /* border-radius: 12px; */
-  transition: all 0.5s ease;
-  animation: slideUp 0.8s ease-out both;
+  padding: 32px 28px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
   overflow: hidden;
   min-width: 200px;
+  cursor: pointer;
 }
 
+/* animated corner brackets */
 .spec-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -136,7 +169,7 @@
 }
 
 .spec-card::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   right: 0;
@@ -147,126 +180,111 @@
   transition: width 0.3s ease, height 0.3s ease 0.3s;
 }
 
-.spec-card:hover::before {
-  width: 100%;
-  height: 100%;
-  transition: width 0.3s ease, height 0.3s ease;
-}
-
+.spec-card:hover::before,
 .spec-card:hover::after {
   width: 100%;
   height: 100%;
   transition: width 0.3s ease, height 0.3s ease;
 }
 
-.spec-card:nth-child(1) {
-  animation-delay: 0.6s;
-}
-
-.spec-card:nth-child(2) {
-  animation-delay: 0.8s;
-}
-
 .spec-card:hover {
   transform: translateY(-8px);
-  background: rgba(0, 102, 255, 0.08);
-  box-shadow: 0 15px 50px rgba(0, 102, 255, 0.4);
+  background: rgba(0, 102, 255, 0.07);
+  box-shadow: 0 20px 50px rgba(0, 102, 255, 0.3);
 }
 
+.spec-card:nth-child(1) { animation-delay: 0.5s; }
+.spec-card:nth-child(2) { animation-delay: 0.7s; }
+
+/* icon circle */
 .spec-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 20px;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
   background: linear-gradient(135deg, #003399, #0066ff);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s ease;
+  transition: transform 0.5s ease, box-shadow 0.4s ease;
 }
 
 .spec-card:hover .spec-icon {
   transform: scale(1.1) rotate(360deg);
-  box-shadow: 0 0 25px rgba(0, 102, 255, 0.8);
+  box-shadow: 0 0 28px rgba(0, 102, 255, 0.7);
 }
 
 .spec-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   color: #fff;
 }
 
 .spec-card h3 {
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 10px;
-  letter-spacing: 1.5px;
+  margin: 0 0 8px;
+  letter-spacing: 2px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .spec-card p {
-  font-size: 13px;
-  color: #aaa;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
   line-height: 1.6;
   text-align: center;
+  margin: 0;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* ── hero bike image ── */
 .hero-bike {
   position: absolute;
-  right: 1%;
-  bottom: 5%;
-  height: 700px;
-  /* filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3)); */
-  animation: fadeInRight 2s ease-out;
+  right: 2%;
+  bottom: 4%;
+  height: 680px;
+  z-index: 4;
+  animation: fadeInRight 1s ease-out;
+  filter: drop-shadow(-20px 20px 40px rgba(0, 0, 0, 0.6));
 }
 
+/* ══════════════════════════════════════
+   Keyframes
+══════════════════════════════════════ */
 @keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
+/* ══════════════════════════════════════
+   Responsive
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .wn-header { padding: 0 24px 40px; }
+  .wn-title  { font-size: 36px; }
 
+  .hero-section { height: auto; }
+  .top-content  { height: auto; padding: 60px 24px; }
+  .top-content::after { display: none; }
+  .black-area   { position: static; height: auto; padding: 40px 24px; }
 
+  .hero-bike {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
-
+  .spec-cards { flex-direction: column; }
+}

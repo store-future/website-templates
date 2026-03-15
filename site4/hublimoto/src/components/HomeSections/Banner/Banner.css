@@ -1,8 +1,22 @@
 .banner {
   width: 100%;
-  margin-top: 70px;
+  height: 90vh;
   position: relative;
   overflow: hidden;
+  background: #0a0a0a;
+}
+
+/* fade banner bottom into the dark sections below */
+.banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to bottom, transparent, #0a0a0a);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .slider {
@@ -12,30 +26,31 @@
 .banner img,
 .banner-video {
   width: 100%;
-  height: auto;
-  max-height: 600px;
+  height: 90vh;
   flex-shrink: 0;
   object-fit: cover;
 }
 
 .dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  z-index: 3;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s, transform 0.3s;
 }
 
 .dot.active {
   background: #fff;
+  transform: scale(1.4);
 }

@@ -1,42 +1,59 @@
 import "./Whatsnew.css";
+import r3Video from "../../../assets/video/R3.mp4";
+import trackVideo from "../../../assets/video/Yamaha Coimbatore Track Day.mp4";
+import img1 from "../../../assets/images/xsr_black-pc.webp";
+import img2 from "../../../assets/images/R15-S.png.webp";
+import img3 from "../../../assets/images/xsr_silver_price-award-pc.webp";
+import img4 from "../../../assets/images/download2.webp";
 
-const items = [
-  { tag: "Lifestyle", title: "Goodlife Benefits", desc: "Exclusive perks and rewards for every Hero rider." },
-  { tag: "Finance", title: "Finance Your Dreams", desc: "Flexible EMI plans tailored to your budget." },
-  { tag: "Corporate", title: "Special Corporate Benefits", desc: "Premium deals for corporate employees." },
-  { tag: "Offer", title: "Gurudakshina Offer", desc: "Special tribute discounts for educators." },
+const cards = [
+  { image: img1, tag: "New Launch", title: "XSR 900", sub: "Neo-Retro Sport", desc: "Torque-rich CP3 engine meets timeless design." },
+  { image: img2, tag: "Best Seller", title: "YZF-R15", sub: "Supersport 155cc", desc: "Track-bred DNA in an everyday machine." },
+  { image: img3, tag: "Limited", title: "XSR Silver", sub: "Award Edition", desc: "Iconic silver livery. Collector's pride." },
+  { image: img4, tag: "Adventure", title: "Ténéré 700", sub: "Rally Replica", desc: "Dakar spirit. Road-legal freedom." },
 ];
-
-const image = "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1200";
 
 function Whatsnew() {
   return (
-    <div className="wn-section">
+    <section className="whatsnew__section">
 
-      <div className="wn-header">
-        <div className="wn-eyebrow">Explore Special Programs</div>
-        <div className="wn-title">Make The Most <span>Of Yamaha</span></div>
+      {/* Left video strip */}
+      <div className="whatsnew__video-strip whatsnew__video-left">
+        <video src={r3Video} autoPlay muted loop playsInline />
+        <div className="whatsnew__video-label">R3 · Pure Sport</div>
       </div>
 
-      <div className="wn-strip">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className="wn-item"
-            style={{ backgroundImage: `url(${image})` }}
-          >
-            <span className="wn-num">0{i + 1}</span>
-            <div className="wn-item-content">
-              <div className="wn-tag">{item.tag}</div>
-              <div className="wn-item-title">{item.title}</div>
-              <div className="wn-item-desc">{item.desc}</div>
-              <div className="wn-cta">Explore</div>
+      {/* Main content */}
+      <div className="whatsnew__main">
+        <div className="whatsnew__header">
+          <span className="whatsnew__eyebrow">WHAT'S NEW</span>
+          <h2 className="whatsnew__heading">Latest from Yamaha</h2>
+          <p className="whatsnew__subtitle">Discover the newest machines, editions and stories from the world of Yamaha.</p>
+        </div>
+
+        <div className="whatsnew__grid">
+          {cards.map((c) => (
+            <div className="whatsnew__card" key={c.title} style={{ backgroundImage: `url(${c.image})` }}>
+              <div className="whatsnew__card-overlay" />
+              <span className="whatsnew__card-tag">{c.tag}</span>
+              <div className="whatsnew__card-body">
+                <p className="whatsnew__card-sub">{c.sub}</p>
+                <h3 className="whatsnew__card-title">{c.title}</h3>
+                <p className="whatsnew__card-desc">{c.desc}</p>
+                <button className="whatsnew__card-btn">Explore →</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-    </div>
+      {/* Right video strip */}
+      <div className="whatsnew__video-strip whatsnew__video-right">
+        <video src={trackVideo} autoPlay muted loop playsInline />
+        <div className="whatsnew__video-label">Track Day · Coimbatore</div>
+      </div>
+
+    </section>
   );
 }
 

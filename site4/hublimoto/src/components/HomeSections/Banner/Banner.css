@@ -7,13 +7,15 @@
 
 .slider {
   display: flex;
-  transition: transform 0.8s ease-in-out;
 }
 
-.banner img {
+.banner img,
+.banner-video {
   width: 100%;
   height: auto;
+  max-height: 600px;
   flex-shrink: 0;
+  object-fit: cover;
 }
 
 .dots {

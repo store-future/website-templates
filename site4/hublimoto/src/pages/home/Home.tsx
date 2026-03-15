@@ -5,8 +5,7 @@ import Discover from "../../components/HomeSections/discover/Discover";
 import Product from "../../components/HomeSections/product/Product";
 import Allbike from "../../components/HomeSections/allbike/Allbike";
 import Highlight from "../../components/HomeSections/highlight/Highlight";
-import TechnologySection from "../../components/HomeSections/TechnologySection";
-import AboutSection from "../../components/HomeSections/AboutSection";
+
 // import bikeImage from "../../assets/images/download.png";
 
 
@@ -21,8 +20,7 @@ function Home() {
       {/* <Bikecarousal /> */}
       <Discover />
       <Whatsnew />
-      <TechnologySection/>
-      <AboutSection/>
+
       {/* <img src={bikeImage} className="logo" alt="Vite logo" /> */}
 
     </>

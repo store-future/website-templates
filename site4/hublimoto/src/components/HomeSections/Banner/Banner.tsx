@@ -26,11 +26,13 @@ function Banner() {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+
     const timer = setInterval(() => {
       setTransition(true);
       setIndex((prev) => prev + 1);
     }, 13000);
     return () => clearInterval(timer);
+
   }, []);
 
   // When we land on a clone, silently jump to the real slide
@@ -75,8 +77,11 @@ function Banner() {
             className={`dot ${realIndex === i ? "active" : ""}`}
             onClick={() => { setTransition(true); setIndex(i + 1); }}
           />
+
         ))}
+
       </div>
+
     </div>
   );
 }

@@ -1,10 +1,11 @@
 import Banner from "../../components/HomeSections/Banner/Banner";
 import Whatsnew from "../../components/HomeSections/whatsnew/Whatsnew";
-import Discover from "../../components/HomeSections/discover/Discover";
+// import Discover from "../../components/HomeSections/discover/Discover";
 // import Bikecarousal from "../../components/HomeSections/selecttype_copy/Selecttype";
 import Product from "../../components/HomeSections/product/Product";
 import Allbike from "../../components/HomeSections/allbike/Allbike";
 import Highlight from "../../components/HomeSections/highlight/Highlight";
+import TechnologySection from "../../components/HomeSections/TechnologySection";
 
 // import bikeImage from "../../assets/images/download.png";
 
@@ -17,9 +18,10 @@ function Home() {
       <Product />
       <Allbike />
       <Highlight />
-      {/* <Bikecarousal /> */}
-      <Discover />
       <Whatsnew />
+      <TechnologySection/>
+      {/* <Bikecarousal /> */}
+      {/* <Discover /> */}
 
       {/* <img src={bikeImage} className="logo" alt="Vite logo" /> */}
 

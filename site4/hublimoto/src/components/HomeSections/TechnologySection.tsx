@@ -11,7 +11,6 @@ function TechnologySection() {
         {/* Left Content */}
 
         <div>
-
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
             Engineered <span className="text-red-500">For Performance</span>
           </h2>

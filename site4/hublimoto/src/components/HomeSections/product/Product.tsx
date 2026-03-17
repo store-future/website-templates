@@ -33,9 +33,11 @@ function Product() {
     </div>
   </div>
 
+  <img src={bikewithmen} alt="bike" className="hero-bike" />
+
   <div className="black-area">
     <div className="spec-cards">
-      
+
       <div className="spec-card">
         <div className="spec-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -59,8 +61,6 @@ function Product() {
 
     </div>
   </div>
-  <img src={bikewithmen} alt="bike" className="hero-bike" />
-
 </div>
 
     </>

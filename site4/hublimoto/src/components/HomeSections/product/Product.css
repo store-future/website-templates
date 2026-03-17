@@ -56,6 +56,8 @@
   width: 100%;
   height: 700px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── top light half ── */
@@ -270,21 +272,75 @@
 /* ══════════════════════════════════════
    Responsive
 ══════════════════════════════════════ */
-@media (max-width: 900px) {
-  .wn-header { padding: 0 24px 40px; }
-  .wn-title  { font-size: 36px; }
 
-  .hero-section { height: auto; }
-  .top-content  { height: auto; padding: 60px 24px; }
+/* ── Tablet (481px – 900px) ── */
+@media (max-width: 900px) {
+  .wn-header { padding: 0 32px 40px; }
+  .wn-title  { font-size: 38px; }
+
+  .hero-section {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-content {
+    height: auto;
+    padding: 48px 32px 32px;
+    order: 1;
+  }
+
   .top-content::after { display: none; }
-  .black-area   { position: static; height: auto; padding: 40px 24px; }
+
+  .text-area { max-width: 100%; }
+  .text-area h2 { font-size: 38px; }
 
   .hero-bike {
     position: static;
     width: 100%;
+    max-width: 520px;
     height: auto;
     display: block;
+    margin: 0 auto;
+    order: 2;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
   }
 
-  .spec-cards { flex-direction: column; }
+  .black-area {
+    position: static;
+    height: auto;
+    padding: 40px 32px;
+    order: 3;
+    justify-content: center;
+  }
+
+  .spec-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .spec-card { min-width: 180px; flex: 1 1 180px; }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .wn-header { padding: 0 16px 32px; }
+  .wn-title  { font-size: 28px; letter-spacing: -0.5px; }
+  .wn-eyebrow { font-size: 10px; letter-spacing: 2px; }
+
+  .top-content { padding: 36px 16px 24px; }
+  .text-area h2 { font-size: 28px; }
+  .text-area p  { font-size: 14px; }
+
+  .hero-bike {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .black-area { padding: 32px 16px; }
+
+  .spec-cards { flex-direction: column; align-items: stretch; }
+  .spec-card  { min-width: unset; flex: unset; }
 }

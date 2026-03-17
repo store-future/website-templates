@@ -1,20 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import "./Banner.css";
+
 // import banner1 from "../../../assets/images/xsr_black-pc.webp";
 // import banner2 from "../../../assets/images/xsr_silver_price-award-pc.webp";
 // import banner1 from "../../../assets/images/banner1.jpg";
 import banner2 from "../../../assets/images/banner2.webp";
-
-
-
 import videoSrc from "../../../assets/video/R3.mp4";
 
 type Slide = { type: "video"; src: string } | { type: "image"; src: string };
-
 const realSlides: Slide[] = [
   { type: "video", src: videoSrc },
-  // { type: "image", src: banner1 },
   { type: "image", src: banner2 },
+  // { type: "image", src: banner1 },
 ];
 
 // Infinite loop: clone last slide at front, clone first slide at end

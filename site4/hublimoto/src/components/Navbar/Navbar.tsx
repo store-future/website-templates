@@ -13,6 +13,7 @@ import scooterAerox from "../../assets/scooter/2Aerox..png";
 import scooterFascino from "../../assets/scooter/2Fascino 125 Fi Hybrid..jpg";
 import scooterRayZR from "../../assets/scooter/2Ray ZR 125 FI SR Hybrid..jpg";
 
+
 type BikeItem = { name: string; image: string };
 type RightContent = { type: "bikes"; items: BikeItem[] } | { type: "links"; items: string[] };
 
@@ -29,8 +30,8 @@ const navMegaData: Record<string, NavMegaConfig> = {
     sidebar: ["Motorcycle", "Scooter", "EV"],
     subseries: {
       Motorcycle: ["R-Series", "MT-Series", "XSR", "FZ-Series"],
-      Scooter:    ["Fascino", "Ray ZR", "Aerox"],
-      EV:         ["E01", "NEO's", "D'elight", "EC-05"],
+      Scooter:    ["Maxi", "Fascino", "Ray ZR"],
+      EV:         ["Scooter"],
     },
     content: {
       // Motorcycle subseries
@@ -39,14 +40,12 @@ const navMegaData: Record<string, NavMegaConfig> = {
       "XSR":       { type: "bikes", items: [{ name: "XSR 900", image: card5 }, { name: "XSR 700", image: card6 }, { name: "XSR 125", image: card3 }, { name: "XSR Silver", image: card2 }] },
       "FZ-Series": { type: "bikes", items: [{ name: "FZ-S FI", image: card3 }, { name: "FZ 25", image: card1 }, { name: "FZS 25", image: card4 }, { name: "FZ-X", image: card2 }] },
       // Scooter subseries
+      "Maxi":     { type: "bikes", items: [{ name: "Aerox 155 Version S", image: scooterAerox155S }, { name: "Aerox 155", image: scooterAerox }] },
       "Fascino":   { type: "bikes", items: [{ name: "Fascino 125 Fi Hybrid", image: scooterFascino }] },
       "Ray ZR":    { type: "bikes", items: [{ name: "Ray ZR 125 FI SR Hybrid", image: scooterRayZR }] },
-      "Aerox":     { type: "bikes", items: [{ name: "Aerox 155 Version S", image: scooterAerox155S }, { name: "Aerox 155", image: scooterAerox }] },
       // EV subseries
-      "E01":       { type: "bikes", items: [{ name: "E01 Standard", image: card3 }, { name: "E01 Pro", image: card1 }, { name: "E01 Sport", image: card4 }, { name: "E01 Urban", image: card2 }] },
-      "NEO's":     { type: "bikes", items: [{ name: "NEO's Base", image: card1 }, { name: "NEO's Plus", image: card2 }, { name: "NEO's Sport", image: card3 }, { name: "NEO's City", image: card4 }] },
-      "D'elight":  { type: "bikes", items: [{ name: "D'elight 125", image: card4 }, { name: "D'elight S", image: card2 }, { name: "D'elight Urban", image: card1 }, { name: "D'elight Plus", image: card3 }] },
-      "EC-05":     { type: "bikes", items: [{ name: "EC-05 Base", image: card2 }, { name: "EC-05 Pro", image: card3 }, { name: "EC-05 Sport", image: card1 }, { name: "EC-05 Max", image: card4 }] },
+      "Scooter":     { type: "bikes", items: [{ name: "Aerox 155 Version S", image: scooterAerox155S }, { name: "Aerox 155", image: scooterAerox }] },
+
     },
   },
   Dealers: {

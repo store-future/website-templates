@@ -8,6 +8,10 @@ import card3 from "../../assets/images/download2.webp";
 import card4 from "../../assets/images/R15-S.png.webp";
 import card5 from "../../assets/images/xsr_black-pc.webp";
 import card6 from "../../assets/images/xsr_silver_price-award-pc.webp";
+import scooterAerox155S from "../../assets/scooter/2Aerox 155 Version S..jpg";
+import scooterAerox from "../../assets/scooter/2Aerox..png";
+import scooterFascino from "../../assets/scooter/2Fascino 125 Fi Hybrid..jpg";
+import scooterRayZR from "../../assets/scooter/2Ray ZR 125 FI SR Hybrid..jpg";
 
 type BikeItem = { name: string; image: string };
 type RightContent = { type: "bikes"; items: BikeItem[] } | { type: "links"; items: string[] };
@@ -25,7 +29,7 @@ const navMegaData: Record<string, NavMegaConfig> = {
     sidebar: ["Motorcycle", "Scooter", "EV"],
     subseries: {
       Motorcycle: ["R-Series", "MT-Series", "XSR", "FZ-Series"],
-      Scooter:    ["Fascino", "Ray ZR", "Aerox", "Cygnus"],
+      Scooter:    ["Fascino", "Ray ZR", "Aerox"],
       EV:         ["E01", "NEO's", "D'elight", "EC-05"],
     },
     content: {
@@ -35,24 +39,14 @@ const navMegaData: Record<string, NavMegaConfig> = {
       "XSR":       { type: "bikes", items: [{ name: "XSR 900", image: card5 }, { name: "XSR 700", image: card6 }, { name: "XSR 125", image: card3 }, { name: "XSR Silver", image: card2 }] },
       "FZ-Series": { type: "bikes", items: [{ name: "FZ-S FI", image: card3 }, { name: "FZ 25", image: card1 }, { name: "FZS 25", image: card4 }, { name: "FZ-X", image: card2 }] },
       // Scooter subseries
-      "Fascino":   { type: "bikes", items: [{ name: "Fascino 125", image: card5 }, { name: "Fascino Fi", image: card6 }, { name: "Fascino S", image: card2 }, { name: "Fascino Hybrid", image: card3 }] },
-      "Ray ZR":    { type: "bikes", items: [{ name: "Ray ZR 125", image: card6 }, { name: "Ray ZR Street", image: card5 }, { name: "Ray ZR Fi", image: card1 }, { name: "Ray ZR Sport", image: card4 }] },
-      "Aerox":     { type: "bikes", items: [{ name: "Aerox 155", image: card2 }, { name: "Aerox S", image: card3 }, { name: "Aerox R", image: card1 }, { name: "Aerox MotoGP", image: card4 }] },
-      "Cygnus":    { type: "bikes", items: [{ name: "Cygnus Ray", image: card3 }, { name: "Cygnus Alpha", image: card1 }, { name: "Cygnus ZR", image: card2 }, { name: "Cygnus X", image: card4 }] },
+      "Fascino":   { type: "bikes", items: [{ name: "Fascino 125 Fi Hybrid", image: scooterFascino }] },
+      "Ray ZR":    { type: "bikes", items: [{ name: "Ray ZR 125 FI SR Hybrid", image: scooterRayZR }] },
+      "Aerox":     { type: "bikes", items: [{ name: "Aerox 155 Version S", image: scooterAerox155S }, { name: "Aerox 155", image: scooterAerox }] },
       // EV subseries
       "E01":       { type: "bikes", items: [{ name: "E01 Standard", image: card3 }, { name: "E01 Pro", image: card1 }, { name: "E01 Sport", image: card4 }, { name: "E01 Urban", image: card2 }] },
       "NEO's":     { type: "bikes", items: [{ name: "NEO's Base", image: card1 }, { name: "NEO's Plus", image: card2 }, { name: "NEO's Sport", image: card3 }, { name: "NEO's City", image: card4 }] },
       "D'elight":  { type: "bikes", items: [{ name: "D'elight 125", image: card4 }, { name: "D'elight S", image: card2 }, { name: "D'elight Urban", image: card1 }, { name: "D'elight Plus", image: card3 }] },
       "EC-05":     { type: "bikes", items: [{ name: "EC-05 Base", image: card2 }, { name: "EC-05 Pro", image: card3 }, { name: "EC-05 Sport", image: card1 }, { name: "EC-05 Max", image: card4 }] },
-    },
-  },
-  Service: {
-    sidebar: ["Maintenance", "Repairs", "Warranty", "Accessories"],
-    content: {
-      Maintenance:  { type: "links", items: ["Oil Change", "Tyre Service", "Chain Lubrication", "Brake Inspection", "Battery Check"] },
-      Repairs:      { type: "links", items: ["Engine Overhaul", "Suspension Repair", "Electrical Repair", "Body Work", "Gear Box Service"] },
-      Warranty:     { type: "links", items: ["Standard Warranty", "Extended Warranty", "Warranty Claims", "Warranty Registration"] },
-      Accessories:  { type: "links", items: ["Helmets", "Riding Gear", "Bike Covers", "Luggage & Bags", "Performance Parts"] },
     },
   },
   Dealers: {
@@ -62,6 +56,15 @@ const navMegaData: Record<string, NavMegaConfig> = {
       Showrooms:         { type: "links", items: ["City Showrooms", "Premium Outlets", "Experience Centers", "Virtual Tour"] },
       "Service Centers": { type: "links", items: ["Authorized Centers", "Express Service", "Mobile Service", "Service Booking"] },
       "Test Ride":       { type: "links", items: ["Book Test Ride", "Test Ride Locations", "Upcoming Events", "Ride Experience"] },
+    },
+  },
+  Service: {
+    sidebar: ["Maintenance", "Repairs", "Warranty", "Accessories"],
+    content: {
+      Maintenance:  { type: "links", items: ["Oil Change", "Tyre Service", "Chain Lubrication", "Brake Inspection", "Battery Check"] },
+      Repairs:      { type: "links", items: ["Engine Overhaul", "Suspension Repair", "Electrical Repair", "Body Work", "Gear Box Service"] },
+      Warranty:     { type: "links", items: ["Standard Warranty", "Extended Warranty", "Warranty Claims", "Warranty Registration"] },
+      Accessories:  { type: "links", items: ["Helmets", "Riding Gear", "Bike Covers", "Luggage & Bags", "Performance Parts"] },
     },
   },
   Parts: {

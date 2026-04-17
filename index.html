@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <style>
         :root {
             --teal: #0d7377;
@@ -176,6 +177,7 @@
             display: flex;
             gap: 8px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -184,22 +186,145 @@
             font-weight: 500;
             padding: 10px 18px;
             border-radius: 8px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateX(-50%);
         }
 
         .nav-links a:hover {
             color: var(--teal);
-            background: rgba(13, 115, 119, 0.06);
+        }
+
+        .nav-links a:hover::after {
+            width: calc(100% - 36px);
+        }
+
+        /* Dropdown Menu Styles */
+        .nav-dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-dropdown > a {
+            position: relative;
+            z-index: 101;
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background: white;
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            border-radius: 8px;
+            min-width: 200px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        /* Invisible bridge to keep dropdown open */
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 8px;
+            z-index: 99;
+        }
+
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:hover > a + .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* Keep dropdown open when hovering directly over it */
+        .dropdown-menu:hover {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--slate-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .dropdown-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateX(-50%);
+        }
+
+        .dropdown-menu li a:hover {
+            background: rgba(13, 115, 119, 0.05);
+            color: var(--teal);
+        }
+
+        .dropdown-menu li a:hover::after {
+            width: calc(100% - 40px);
         }
 
         .btn-cta {
             background: var(--teal);
             color: white !important;
             font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--teal-dark);
+            transition: all 0.35s ease;
+            z-index: -1;
         }
 
         .btn-cta:hover {
-            background: var(--teal-dark);
+            background: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 115, 119, 0.3);
+        }
+
+        .btn-cta:hover::before {
+            left: 0;
         }
 
         /* Hero Section */
@@ -210,6 +335,7 @@
             align-items: center;
             overflow: hidden;
             padding: 120px 0;
+            background: linear-gradient(135deg, #0a5c5f 0%, #2c3e50 100%);
         }
 
         .hero::before {
@@ -227,6 +353,7 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
+            opacity: 0.95;
         }
 
         .hero-content {
@@ -486,18 +613,348 @@
             line-height: 1.6;
         }
 
-        /* About Section */
+        /* About Section — image left (bigger), content right */
         .about-section {
             background: rgba(255, 255, 255, 0.4);
         }
 
-        .about-grid {
+        .about-split {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
+            grid-template-columns: 55% 45%;
+            gap: 56px;
+            align-items: center;
+        }
+
+        /* image wrapper — holds photo + experience badge */
+        .about-image-wrap {
+            position: relative;
+        }
+
+        .about-split-image {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 20px;
+            box-shadow: 0 28px 70px rgba(13,115,119,0.18);
+            display: block;
+        }
+
+        /* experience badge — top-right corner of image */
+        .about-exp-badge {
+            position: absolute;
+            top: 24px;
+            right: -20px;
+            background: var(--teal);
+            color: #fff;
+            border-radius: 12px;
+            padding: 14px 20px;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(13,115,119,0.35);
+            min-width: 110px;
+        }
+
+        .about-exp-badge .exp-num {
+            font-family: 'Source Serif 4', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            display: block;
+        }
+
+        .about-exp-badge .exp-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            opacity: 0.9;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* right content */
+        .about-split-content {
+            padding-right: 8px;
+        }
+
+        .about-split-content .about-eyebrow {
+            display: inline-block;
+            padding: 4px 14px;
+            background: rgba(13,115,119,0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 14px;
+        }
+
+        .about-split-content h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.7rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+
+        .about-split-content h2 span {
+            color: var(--teal);
+        }
+
+        .about-split-content > p {
+            color: var(--gray-600);
+            font-size: 0.97rem;
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+
+        .about-values {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .about-value-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(13,115,119,0.04);
+            border-radius: 10px;
+            border-left: 3px solid var(--teal);
+            transition: background 0.2s ease;
+        }
+
+        .about-value-item:hover { background: rgba(13,115,119,0.08); }
+
+        .about-value-item span:first-child {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .about-value-item strong {
+            display: block;
+            color: var(--slate);
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .about-value-item p {
+            color: var(--gray-600);
+            font-size: 0.82rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .about-split { grid-template-columns: 1fr; gap: 32px; }
+            .about-split-image { height: 320px; }
+            .about-exp-badge { right: 12px; top: 16px; }
+        }
+
+        /* ABA Therapy Section — modern 2-col layout */
+        .aba-section {
+            background: linear-gradient(135deg, #f0fafa 0%, #faf8f5 100%);
+            overflow: hidden;
+        }
+
+        /* ABA 2-col layout */
+        .aba-layout {
+            display: grid;
+            grid-template-columns: 42% 58%;
+            gap: 0;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(13,115,119,0.12);
+        }
+
+        /* Left panel — heading + subheading + stats */
+        .aba-left {
+            background: linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%);
+            padding: 56px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aba-left::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .aba-left::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: -40px;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .aba-left .aba-eyebrow {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .aba-left h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .aba-left p {
+            color: rgba(255,255,255,0.82);
+            font-size: 0.97rem;
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        .aba-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .aba-stat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
+            padding: 14px 18px;
+        }
+
+        .aba-stat-num {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+            min-width: 56px;
+        }
+
+        .aba-stat-label {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.4;
+        }
+
+        /* Right panel — feature cards grid */
+        .aba-right {
+            padding: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .aba-right-title {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(13,115,119,0.1);
+        }
+
+        .aba-features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .aba-feat-card {
+            background: linear-gradient(135deg, #f8fffe 0%, #f5f3f0 100%);
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid rgba(13,115,119,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aba-feat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--teal), var(--teal-dark));
+            border-radius: 4px 0 0 4px;
+        }
+
+        .aba-feat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(13,115,119,0.12);
+            border-color: rgba(13,115,119,0.2);
+        }
+
+        .aba-feat-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .aba-feat-card h4 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--slate);
+            margin-bottom: 6px;
+        }
+
+        .aba-feat-card p {
+            color: var(--gray-600);
+            font-size: 0.82rem;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .aba-layout { grid-template-columns: 1fr; }
+            .aba-left { padding: 40px 32px; }
+            .aba-right { padding: 36px 32px; }
+            .aba-features-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Team Column (kept for reference, unused) */
+        .team-column {
+            display: none;
         }
 
         .about-card {
+            display: none;
             text-align: center;
             padding: 32px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
@@ -538,145 +995,332 @@
             line-height: 1.6;
         }
 
-        /* Search Section */
-        .search-section {
-            padding: 50px 0;
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1rem;
-            border: 2px solid rgba(13, 115, 119, 0.2);
-            border-radius: 12px;
-            background: white;
-            transition: border-color 0.2s;
-        }
-
-        .search-input:focus {
-            border-color: var(--teal);
-            outline: none;
-        }
-
-        .search-results {
-            margin-top: 16px;
-            font-size: 0.9rem;
-            color: var(--gray-600);
-        }
-
-        /* Conditions Section */
+        /* ── Conditions section ── */
         .conditions-section {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 248, 242, 0.3) 100%);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            padding: 100px 0 0;
+        }
+        .conditions-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            opacity: 0.12;
+            z-index: 0;
+            pointer-events: none;
+            filter: saturate(0.4) brightness(1.1);
+        }
+        .conditions-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,248,242,0.9) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .conditions-section .container { position: relative; z-index: 2; }
+
+        /* heading block centered above grid */
+        .conditions-heading {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+        .conditions-heading .highlight {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(13,115,119,0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .conditions-heading h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--teal), var(--slate));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .conditions-heading p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
+        /* full-width grid wrapper — escapes container */
+        .conditions-grid-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 0 40px 60px;
+        }
+
+        /* ── Conditions grid ── */
         .conditions-grid {
+            position: relative;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            min-height: 420px;
         }
 
+        /* Default mini card */
         .condition-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 242, 0.96) 100%);
-            padding: 28px;
-            border-radius: 12px;
+            background: #fff;
+            border-radius: 20px;
             border-top: 4px solid var(--accent-border);
-            transition: all 0.35s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+            overflow: hidden;
             cursor: pointer;
+            position: relative;
+            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1),
+                        transform 0.5s cubic-bezier(0.4,0,0.2,1),
+                        border-color 0.3s ease;
         }
 
-        .condition-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(255, 140, 60, 0.15);
+        /* Water ripple element — starts as tiny circle, floods outward */
+        .condition-card::before {
+            content: '';
+            position: absolute;
+            top: var(--ry, 50%);
+            left: var(--rx, 50%);
+            transform: translate(-50%, -50%) scale(0);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, rgba(14,130,135,0.95) 0%, rgba(10,92,95,0.98) 50%, rgba(7,65,68,1) 100%);
+            transition: transform 0s, opacity 0s;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
         }
 
+        /* flood: slow organic water spread */
+        .condition-card.flooding::before {
+            transform: translate(-50%, -50%) scale(var(--flood-scale, 30));
+            opacity: 1;
+            transition:
+                transform 1.4s cubic-bezier(0.1, 0.4, 0.25, 1),
+                opacity 0.15s ease;
+        }
+
+        /* recede: instant snap — no animation */
+        .condition-card.receding::before {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: none;
+        }
+
+        /* other cards fade/shrink when flooding is active */
+        .conditions-grid.has-hover .condition-card:not(.flooding):not(.receding) {
+            opacity: 0;
+            transform: scale(0.88) translateY(6px);
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.4,0,0.2,1),
+                        transform 0.45s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* flooded card expands to fill grid */
+        .condition-card.flooding,
+        .condition-card.flooded {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 20px;
+            border: none;
+            z-index: 10;
+            opacity: 1 !important;
+            transform: none !important;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 32px 80px rgba(13,115,119,0.3);
+        }
+
+        /* card header — equal 28px padding all sides on flooded */
         .condition-card-header {
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
+            align-items: center;
+            gap: 18px;
+            padding: 28px;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
         }
 
         .condition-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px;
-            background: rgba(13, 115, 119, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            background: rgba(13,115,119,0.08);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.7rem; flex-shrink: 0;
+            transition: background 0.4s ease, transform 0.55s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+        }
+        .condition-card.flooded .condition-icon {
+            background: rgba(255,255,255,0.18);
+            transform: scale(1.15) rotate(-6deg);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.18);
         }
 
         .condition-content h4 {
             font-family: 'Source Serif 4', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--slate);
-            margin-bottom: 8px;
+            font-size: 1.15rem; font-weight: 600;
+            color: var(--slate); margin-bottom: 5px;
+            transition: color 0.3s ease;
+            position: relative; z-index: 2;
         }
+        .condition-card.flooded .condition-content h4 { color: #fff; }
 
         .condition-content p {
             color: var(--gray-600);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.88rem; line-height: 1.55; margin: 0;
+            transition: color 0.3s ease;
+            position: relative; z-index: 2;
         }
+        .condition-card.flooded .condition-content p { color: rgba(255,255,255,0.8); }
 
-        .condition-toggle {
-            background: none;
-            border: none;
-            color: var(--teal);
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: auto;
-            transition: transform 0.2s;
-        }
-
-        .condition-card.expanded .condition-toggle {
-            transform: rotate(180deg);
-        }
-
+        /* detail panel — equal 28px margin from all edges, flex-grows to fill */
         .condition-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            margin-top: 16px;
+            display: none;
+            padding: 0 28px 28px;
+            position: relative; z-index: 2;
+            flex: 1;
+            min-height: 0;
+        }
+        .condition-card.flooded .condition-details {
+            display: block;
+            animation: waveContentIn 0.28s cubic-bezier(0.4,0,0.2,1) 0.55s both;
+        }
+        @keyframes waveContentIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .condition-card.expanded .condition-details {
-            max-height: 500px;
-        }
-
-        .condition-details h5 {
-            font-weight: 600;
-            color: var(--slate);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .condition-details ul {
-            list-style: none;
-            padding: 0;
+        /* top intro strip */
+        .condition-details-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
             margin-bottom: 16px;
+            animation: colWave 0.25s ease 0.55s both;
         }
-
-        .condition-details li {
-            padding: 4px 0;
-            color: var(--gray-600);
+        .condition-details-header .detail-badge {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            white-space: nowrap;
+        }
+        .condition-details-header p {
+            color: rgba(255,255,255,0.82);
             font-size: 0.9rem;
+            line-height: 1.55;
+            margin: 0;
         }
 
+        /* 4 columns — fill remaining height equally */
+        .condition-details-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            height: calc(100% - 80px);
+        }
+        .condition-details-inner > div {
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            animation: colWave 0.25s cubic-bezier(0.4,0,0.2,1) both;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            overflow: hidden;
+        }
+        .condition-details-inner > div:hover {
+            background: rgba(255,255,255,0.15) !important;
+            border-color: rgba(255,255,255,0.28);
+        }
+        .condition-details-inner > div:nth-child(1) { animation-delay: 0.58s; background: rgba(255,255,255,0.05); }
+        .condition-details-inner > div:nth-child(2) { animation-delay: 0.65s; background: rgba(255,255,255,0.09); }
+        .condition-details-inner > div:nth-child(3) { animation-delay: 0.72s; background: rgba(255,255,255,0.05); }
+        .condition-details-inner > div:nth-child(4) { animation-delay: 0.79s; background: rgba(255,255,255,0.1); }
+        @keyframes colWave {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* column heading with accent line */
+        .condition-details h5 {
+            font-weight: 700;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 11px;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .condition-details h5::before {
+            content: '';
+            width: 3px; height: 12px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* list items — clean pill rows */
+        .condition-details ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+        .condition-details li {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.83rem; line-height: 1.45;
+            display: flex; align-items: flex-start; gap: 7px;
+            padding: 5px 8px; border-radius: 7px;
+            transition: background 0.18s ease, transform 0.18s ease;
+        }
+        .condition-details li:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateX(3px);
+            color: #fff;
+        }
         .condition-details li::before {
-            content: '•';
-            color: var(--teal);
-            margin-right: 8px;
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .conditions-grid-wrapper { padding: 0 24px 48px; }
+            .condition-details-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .conditions-grid { grid-template-columns: 1fr; min-height: unset; }
+            .conditions-grid-wrapper { padding: 0 16px 40px; }
+            .condition-details-inner { grid-template-columns: 1fr; }
         }
 
         /* Therapists Section */
@@ -854,8 +1498,20 @@
 
         .why-choose-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .why-choose-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .why-choose-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .why-choose-item {
@@ -1187,36 +1843,187 @@
         }
 
         .cta-box {
-            background: var(--teal);
-            padding: 56px;
-            border-radius: 12px;
+            position: relative;
+            background: linear-gradient(135deg, #0a5c5f 0%, #0d7377 50%, #14a0a6 100%);
+            padding: 72px 56px;
+            border-radius: 20px;
             text-align: center;
             color: white;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(13,115,119,0.35);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            pointer-events: none;
+        }
+
+        .cta-box::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -60px;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            pointer-events: none;
+        }
+
+        .cta-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.95);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 7px 18px;
+            border-radius: 25px;
+            margin-bottom: 24px;
         }
 
         .cta-box h2 {
             font-family: 'Source Serif 4', serif;
-            font-size: clamp(1.6rem, 3.5vw, 2rem);
-            font-weight: 600;
-            margin-bottom: 14px;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
         }
 
-        .cta-box p {
-            opacity: 0.95;
-            margin-bottom: 28px;
-            max-width: 480px;
+        .cta-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 16px;
+        }
+
+        .cta-box > p {
+            opacity: 0.82;
+            margin-bottom: 36px;
+            max-width: 520px;
             margin-left: auto;
             margin-right: auto;
             font-size: 1rem;
+            line-height: 1.7;
         }
+
+        .cta-trust {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .cta-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
+        }
+
+        .cta-trust-item span:first-child { font-size: 1rem; }
 
         .btn-white {
             background: white;
             color: var(--teal);
+            font-size: 1rem;
+            padding: 16px 36px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: all 0.25s ease;
         }
 
         .btn-white:hover {
             background: var(--gray-100);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+        }
+
+        .cta-note {
+            margin-top: 16px;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .cta-highlight-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.35);
+            border-radius: 60px;
+            padding: 14px 32px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-highlight-bar .free-tag {
+            background: #fff;
+            color: var(--teal);
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            animation: ctaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+            50% { box-shadow: 0 0 0 7px rgba(255,255,255,0); }
+        }
+
+        .cta-highlight-bar .call-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .cta-highlight-bar .divider { color: rgba(255,255,255,0.35); font-size: 1.2rem; }
+
+        .cta-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 10px 22px;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .cta-phone:hover { background: rgba(255,255,255,0.2); }
+
+        .cta-phone .ph-icon { font-size: 1.1rem; }
+
+        .cta-phone .ph-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.65);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1;
+        }
+
+        .cta-phone .ph-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: 0.5px;
         }
 
         /* Footer */
@@ -1309,30 +2116,62 @@
 
         .footer-social {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             margin-top: 20px;
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            background: rgba(13, 115, 119, 0.2);
-            border: 2px solid var(--teal);
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--teal);
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
+            font-size: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .social-link:hover {
-            background: var(--teal);
-            color: white;
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(13, 115, 119, 0.3);
+            border-color: transparent;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        }
+
+        .social-link .icon {
+            position: relative;
+            color: #fff;
+            transition: color 0.5s ease, transform 0.6s ease;
+            z-index: 3;
+        }
+
+        .social-link:hover .icon {
+            color: #fff;
+            transform: rotateY(360deg);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: top 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 2;
+        }
+
+        .social-link:hover::before { top: 0; }
+
+        .social-link.facebook::before  { background: #3b5999; }
+        .social-link.twitter::before   { background: #1da1f2; }
+        .social-link.linkedin::before  { background: #0077b5; }
+        .social-link.instagram::before {
+            background: radial-gradient(circle at 30% 110%, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
 
         .footer-newsletter {
@@ -1436,18 +2275,114 @@
             }
         }
 
+        /* Mobile hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            background: none;
+            border: none;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--slate);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         @media (max-width: 768px) {
+            .nav-hamburger { display: flex; }
+
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                background: rgba(250,251,252,0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                padding: 80px 24px 32px;
+                gap: 4px;
+                z-index: 99;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             }
-            
-            .hero {
-                min-height: 500px;
+            .nav-links.open { display: flex; }
+            .nav-links li { width: 100%; }
+            .nav-links a { display: block; padding: 14px 16px; font-size: 1rem; border-radius: 8px; }
+            .nav-dropdown .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                box-shadow: none;
+                border: none;
+                background: rgba(13,115,119,0.04);
+                border-radius: 8px;
+                padding: 4px 0;
+                margin-top: 4px;
+                display: none;
             }
-            
-            .about-grid {
-                grid-template-columns: 1fr;
+            .nav-dropdown.open .dropdown-menu { display: block; }
+
+            .hero { min-height: 100svh; padding: 80px 0 60px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+
+            .about-split { grid-template-columns: 1fr; gap: 32px; }
+            .about-split-image { height: 280px; }
+            .about-exp-badge { right: 12px; top: 16px; }
+
+            section { padding: 64px 0; }
+            .container { padding: 0 16px; }
+
+            .aba-layout { grid-template-columns: 1fr; }
+            .aba-left { padding: 32px 24px; }
+            .aba-right { padding: 28px 24px; }
+            .aba-features-grid { grid-template-columns: 1fr; }
+
+            .conditions-grid { grid-template-columns: 1fr; min-height: unset; }
+            .conditions-grid-wrapper { padding: 0 16px 32px; }
+            .condition-details-inner { grid-template-columns: 1fr; }
+
+            /* Show conditions details on tap (mobile) */
+            .condition-card { cursor: pointer; }
+            .condition-card .condition-details {
+                display: none;
+                padding: 0 16px 16px;
+                background: linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%);
+                border-radius: 0 0 16px 16px;
             }
+            .condition-card.tap-open .condition-details { display: block; animation: waveContentIn 0.3s ease both; }
+            .condition-card.tap-open .condition-card-header { background: linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: 16px 16px 0 0; }
+            .condition-card.tap-open .condition-content h4 { color: #fff; }
+            .condition-card.tap-open .condition-content p { color: rgba(255,255,255,0.8); }
+
+            .process-steps { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .why-choose-grid { grid-template-columns: 1fr; }
+
+            .cta-box { padding: 40px 20px; }
+            .cta-highlight-bar { flex-direction: column; gap: 10px; padding: 14px 20px; }
+            .cta-trust { gap: 16px; }
+            .cta-trust-item { font-size: 0.82rem; }
+
+            .footer-content { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 30px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.5rem; }
+            .hero-buttons { flex-direction: column; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            .process-steps { grid-template-columns: 1fr; }
+            .aba-features-grid { grid-template-columns: 1fr; }
+            .footer-newsletter { flex-direction: column; }
         }
     </style>
 </head>
@@ -1462,11 +2397,18 @@
                     <div class="logo-icon">N</div>
                     <span class="logo-text">NeuroCare</span>
                 </a>
-                <ul class="nav-links">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#conditions">Conditions</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li class="nav-dropdown">
+                        <a href="#services">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#aba-therapy">ABA Therapy</a></li>
+                            <li><a href="#training-supervision">Training and Supervision</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#about-us">About Us</a></li>
                     <li><a href="#contact" class="btn-cta">Book a Session</a></li>
                 </ul>
             </nav>
@@ -1489,28 +2431,51 @@
 
     <div class="section-divider"></div>
 
-    <!-- About Us / Mission Section -->
-    <section class="about-section section-highlight" id="about">
+    <!-- About Us Section -->
+    <section class="about-section section-highlight" id="about-us">
         <div class="container">
-            <div class="section-title fade-slide">
-                <h2>Our Mission</h2>
-                <p>Compassionate care focused on lasting change</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card scale-in stagger-1">
-                    <div class="about-icon">💚</div>
-                    <h3>Compassion</h3>
-                    <p>We approach every child and family with empathy, understanding, and genuine care for their unique journey.</p>
+            <div class="about-split">
+                <!-- Left: Image with experience badge -->
+                <div class="about-image-wrap fade-slide">
+                    <img
+                        src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=900&h=1100&fit=crop&crop=top"
+                        alt="Female doctor at NeuroCare"
+                        class="about-split-image"
+                    >
+                    <div class="about-exp-badge">
+                        <span class="exp-num">12+</span>
+                        <span class="exp-label">Years of<br>Experience</span>
+                    </div>
                 </div>
-                <div class="about-card scale-in stagger-2">
-                    <div class="about-icon">👨‍👩‍👧‍👦</div>
-                    <h3>Family-Centered Care</h3>
-                    <p>Parents and caregivers are essential partners in the therapeutic process, ensuring progress extends beyond our sessions.</p>
-                </div>
-                <div class="about-card scale-in stagger-3">
-                    <div class="about-icon">🎯</div>
-                    <h3>Long-Term Improvement</h3>
-                    <p>We focus on sustainable progress and lasting change, not quick fixes. Your child's long-term wellbeing is our priority.</p>
+                <!-- Right: Content -->
+                <div class="about-split-content fade-slide stagger-2">
+                    <span class="about-eyebrow">About NeuroCare</span>
+                    <h2>Healing Through <span>Science</span> &amp; Compassion</h2>
+                    <p>We are a dedicated team of neurological therapists committed to helping children and families navigate the challenges of neurological conditions with compassion, science, and heart.</p>
+                    <p>Since our founding, we have supported hundreds of children in achieving milestones once thought out of reach — empowering families every step of the way.</p>
+                    <div class="about-values">
+                        <div class="about-value-item">
+                            <span>💚</span>
+                            <div>
+                                <strong>Compassion First</strong>
+                                <p>Every child and family is treated with genuine empathy and respect.</p>
+                            </div>
+                        </div>
+                        <div class="about-value-item">
+                            <span>🏆</span>
+                            <div>
+                                <strong>Evidence-Based Practice</strong>
+                                <p>All therapies are grounded in scientific research and proven methodology.</p>
+                            </div>
+                        </div>
+                        <div class="about-value-item">
+                            <span>👨‍👩‍👧‍👦</span>
+                            <div>
+                                <strong>Family-Centered Care</strong>
+                                <p>Parents are essential partners — progress extends beyond our sessions.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1518,198 +2483,169 @@
 
     <div class="section-divider"></div>
 
-    <!-- Search Section -->
-    <section class="search-section section-highlight">
+    <!-- ABA Therapy Section -->
+    <section class="aba-section section-highlight" id="aba-therapy">
         <div class="container">
-            <div class="search-container fade-slide">
-                <input type="text" id="disorder-search" class="search-input" placeholder="Search disorders by name (e.g., cerebral palsy, autism, ADHD)...">
-                <div id="search-results" class="search-results"></div>
+            <div class="aba-layout fade-slide">
+                <!-- Left: heading + subheading + stats -->
+                <div class="aba-left">
+                    <span class="aba-eyebrow">Evidence-Based Care</span>
+                    <h2>What is ABA Therapy?</h2>
+                    <p>Applied Behavior Analysis is a scientifically-proven approach that uses data-driven strategies to promote meaningful, positive change in children with autism and developmental conditions.</p>
+                    <div class="aba-stats">
+                        <div class="aba-stat">
+                            <span class="aba-stat-num">1000+</span>
+                            <span class="aba-stat-label">Children successfully treated through our ABA programs</span>
+                        </div>
+                        <div class="aba-stat">
+                            <span class="aba-stat-num">98%</span>
+                            <span class="aba-stat-label">Family satisfaction rate across all therapy programs</span>
+                        </div>
+                        <div class="aba-stat">
+                            <span class="aba-stat-num">15+</span>
+                            <span class="aba-stat-label">Years average experience per certified specialist</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right: feature cards grid -->
+                <div class="aba-right">
+                    <div class="aba-right-title">How Our ABA Program Works</div>
+                    <div class="aba-features-grid">
+                        <div class="aba-feat-card scale-in stagger-1">
+                            <div class="aba-feat-icon">&#x1F4CB;</div>
+                            <h4>Personalized Plans</h4>
+                            <p>Each program is fully customized to your child's unique needs, strengths, and learning style.</p>
+                        </div>
+                        <div class="aba-feat-card scale-in stagger-2">
+                            <div class="aba-feat-icon">&#x1F3AF;</div>
+                            <h4>Goal-Oriented Sessions</h4>
+                            <p>Every session targets specific, measurable goals with clear milestones to track progress.</p>
+                        </div>
+                        <div class="aba-feat-card scale-in stagger-3">
+                            <div class="aba-feat-icon">&#x1F3E0;</div>
+                            <h4>Generalization Focus</h4>
+                            <p>Skills are reinforced across home, school, and community for real-world impact.</p>
+                        </div>
+                        <div class="aba-feat-card scale-in stagger-4">
+                            <div class="aba-feat-icon">&#x1F4CA;</div>
+                            <h4>Data-Driven Progress</h4>
+                            <p>Continuous data collection ensures transparent, evidence-backed outcomes for families.</p>
+                        </div>
+                        <div class="aba-feat-card scale-in stagger-5">
+                            <div class="aba-feat-icon">&#x1F46A;</div>
+                            <h4>Parent Coaching</h4>
+                            <p>We equip parents with strategies to support their child's growth between sessions.</p>
+                        </div>
+                        <div class="aba-feat-card scale-in stagger-6">
+                            <div class="aba-feat-icon">&#x2705;</div>
+                            <h4>Certified Specialists</h4>
+                            <p>All therapists are BCBA-certified with specialized pediatric neurological expertise.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- Conditions We Treat Section -->
     <section class="conditions-section section-highlight" id="conditions">
+        <video class="conditions-bg-video" autoplay muted loop playsinline>
+            <source src="15522-264715974_medium.mp4" type="video/mp4">
+        </video>
         <div class="container">
-            <div class="gradient-heading fade-slide">
+            <div class="conditions-heading fade-slide">
                 <div class="highlight">Specialized Care</div>
                 <h2>Conditions We Treat</h2>
                 <p>Comprehensive neurological therapy for various conditions affecting children and families</p>
             </div>
-            <div class="conditions-grid">
-                <div class="condition-card scale-in stagger-1" data-condition="cerebral palsy">
-                    <div class="condition-card-header">
-                        <div class="condition-icon">🧠</div>
-                        <div class="condition-content">
-                            <h4>Cerebral Palsy</h4>
-                            <p>Improving motor function, coordination, and independence through targeted interventions.</p>
+        </div>
+        <div class="conditions-grid-wrapper">
+            <div class="conditions-grid" id="conditionsGrid">
+                <div class="condition-card scale-in stagger-1">
+                        <div class="condition-card-header">
+                            <div class="condition-icon">⚡</div>
+                            <div class="condition-content">
+                                <h4>Autism Spectrum Disorder</h4>
+                                <p>Supporting communication, social skills, and sensory processing.</p>
+                            </div>
                         </div>
-                        <button class="condition-toggle">▼</button>
-                    </div>
-                    <div class="condition-details">
-                        <div class="condition-symptoms">
-                            <h5>Common Symptoms:</h5>
-                            <ul>
-                                <li>Muscle stiffness or weakness</li>
-                                <li>Difficulty with coordination</li>
-                                <li>Balance problems</li>
-                                <li>Involuntary movements</li>
-                            </ul>
+                        <div class="condition-details">
+                            <div class="condition-details-header">
+                                <div class="detail-badge">⚡ Autism Spectrum</div>
+                                <p>Personalized programs that build communication, reduce sensory distress, and develop meaningful social connections for each child.</p>
+                            </div>
+                            <div class="condition-details-inner">
+                                <div><h5>Common Symptoms</h5><ul><li>Difficulty with social communication</li><li>Repetitive behaviors</li><li>Sensory sensitivities</li><li>Challenges with routine changes</li></ul></div>
+                                <div><h5>Our Treatments</h5><ul><li>Sensory integration therapy</li><li>Communication skill development</li><li>Social skills training</li></ul></div>
+                                <div><h5>How We Help</h5><ul><li>Individualized therapy programs</li><li>Parent coaching & training</li><li>School collaboration support</li></ul></div>
+                                <div><h5>Outcomes</h5><ul><li>Improved social interactions</li><li>Reduced sensory distress</li><li>Enhanced communication skills</li></ul></div>
+                            </div>
                         </div>
-                        <div class="condition-treatments">
-                            <h5>Our Treatments:</h5>
-                            <ul>
-                                <li>Physical therapy for mobility</li>
-                                <li>Occupational therapy for daily skills</li>
-                                <li>Gait training and balance work</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-                <div class="condition-card scale-in stagger-2" data-condition="autism spectrum disorder">
-                    <div class="condition-card-header">
-                        <div class="condition-icon">⚡</div>
-                        <div class="condition-content">
-                            <h4>Autism Spectrum Disorder</h4>
-                            <p>Supporting communication, social skills, and sensory processing.</p>
+                <div class="condition-card scale-in stagger-2">
+                        <div class="condition-card-header">
+                            <div class="condition-icon">🎯</div>
+                            <div class="condition-content">
+                                <h4>ADHD</h4>
+                                <p>Enhancing focus, attention, and executive function skills.</p>
+                            </div>
                         </div>
-                        <button class="condition-toggle">▼</button>
-                    </div>
-                    <div class="condition-details">
-                        <div class="condition-symptoms">
-                            <h5>Common Symptoms:</h5>
-                            <ul>
-                                <li>Difficulty with social communication</li>
-                                <li>Repetitive behaviors</li>
-                                <li>Sensory sensitivities</li>
-                                <li>Challenges with routine changes</li>
-                            </ul>
+                        <div class="condition-details">
+                            <div class="condition-details-header">
+                                <div class="detail-badge">🎯 ADHD</div>
+                                <p>Evidence-based strategies to strengthen focus, self-regulation, and executive function so children can thrive at school and home.</p>
+                            </div>
+                            <div class="condition-details-inner">
+                                <div><h5>Common Symptoms</h5><ul><li>Difficulty focusing or paying attention</li><li>Hyperactivity and impulsiveness</li><li>Problems with organization</li><li>Difficulty following instructions</li></ul></div>
+                                <div><h5>Our Treatments</h5><ul><li>Cognitive behavioral therapy</li><li>Executive function training</li><li>Attention and focus exercises</li></ul></div>
+                                <div><h5>How We Help</h5><ul><li>Structured daily routines</li><li>Behavioral reward strategies</li><li>Impulse control exercises</li></ul></div>
+                                <div><h5>Outcomes</h5><ul><li>Better focus in school</li><li>Improved self-regulation</li><li>Enhanced organizational skills</li></ul></div>
+                            </div>
                         </div>
-                        <div class="condition-treatments">
-                            <h5>Our Treatments:</h5>
-                            <ul>
-                                <li>Sensory integration therapy</li>
-                                <li>Communication skill development</li>
-                                <li>Social skills training</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-                <div class="condition-card scale-in stagger-3" data-condition="adhd attention deficit">
-                    <div class="condition-card-header">
-                        <div class="condition-icon">🎯</div>
-                        <div class="condition-content">
-                            <h4>ADHD</h4>
-                            <p>Enhancing focus, attention, and executive function skills.</p>
+                <div class="condition-card scale-in stagger-3">
+                        <div class="condition-card-header">
+                            <div class="condition-icon">🦴</div>
+                            <div class="condition-content">
+                                <h4>Developmental Delays</h4>
+                                <p>Supporting milestone achievement and developmental progress.</p>
+                            </div>
                         </div>
-                        <button class="condition-toggle">▼</button>
-                    </div>
-                    <div class="condition-details">
-                        <div class="condition-symptoms">
-                            <h5>Common Symptoms:</h5>
-                            <ul>
-                                <li>Difficulty focusing or paying attention</li>
-                                <li>Hyperactivity and impulsiveness</li>
-                                <li>Problems with organization</li>
-                                <li>Difficulty following instructions</li>
-                            </ul>
+                        <div class="condition-details">
+                            <div class="condition-details-header">
+                                <div class="detail-badge">🦴 Dev. Delays</div>
+                                <p>Early intervention and family-centered care to accelerate milestone achievement and support each stage of development.</p>
+                            </div>
+                            <div class="condition-details-inner">
+                                <div><h5>Common Symptoms</h5><ul><li>Delayed motor skills</li><li>Speech and language delays</li><li>Cognitive development delays</li><li>Social and emotional delays</li></ul></div>
+                                <div><h5>Our Treatments</h5><ul><li>Early intervention therapy</li><li>Developmental milestone support</li><li>Family-centered care plans</li></ul></div>
+                                <div><h5>How We Help</h5><ul><li>Play-based therapy methods</li><li>Gross & fine motor exercises</li><li>Parent-guided home activities</li></ul></div>
+                                <div><h5>Outcomes</h5><ul><li>Milestone achievement</li><li>Stronger motor coordination</li><li>Improved social readiness</li></ul></div>
+                            </div>
                         </div>
-                        <div class="condition-treatments">
-                            <h5>Our Treatments:</h5>
-                            <ul>
-                                <li>Cognitive behavioral therapy</li>
-                                <li>Executive function training</li>
-                                <li>Attention and focus exercises</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-                <div class="condition-card scale-in stagger-4" data-condition="developmental delays">
-                    <div class="condition-card-header">
-                        <div class="condition-icon">🦴</div>
-                        <div class="condition-content">
-                            <h4>Developmental Delays</h4>
-                            <p>Supporting milestone achievement and developmental progress.</p>
+                <div class="condition-card scale-in stagger-4">
+                        <div class="condition-card-header">
+                            <div class="condition-icon">🧩</div>
+                            <div class="condition-content">
+                                <h4>Learning Disabilities</h4>
+                                <p>Addressing cognitive challenges and building academic skills.</p>
+                            </div>
                         </div>
-                        <button class="condition-toggle">▼</button>
-                    </div>
-                    <div class="condition-details">
-                        <div class="condition-symptoms">
-                            <h5>Common Symptoms:</h5>
-                            <ul>
-                                <li>Delayed motor skills</li>
-                                <li>Speech and language delays</li>
-                                <li>Cognitive development delays</li>
-                                <li>Social and emotional delays</li>
-                            </ul>
+                        <div class="condition-details">
+                            <div class="condition-details-header">
+                                <div class="detail-badge">🧩 Learning</div>
+                                <p>Multi-sensory tools and cognitive skill training that help children overcome academic challenges and build lasting confidence.</p>
+                            </div>
+                            <div class="condition-details-inner">
+                                <div><h5>Common Symptoms</h5><ul><li>Difficulty with reading or writing</li><li>Problems with math concepts</li><li>Memory and processing issues</li><li>Trouble following directions</li></ul></div>
+                                <div><h5>Our Treatments</h5><ul><li>Cognitive skill development</li><li>Academic support strategies</li><li>Memory and processing training</li></ul></div>
+                                <div><h5>How We Help</h5><ul><li>Multi-sensory learning tools</li><li>Reading fluency programs</li><li>Teacher collaboration plans</li></ul></div>
+                                <div><h5>Outcomes</h5><ul><li>Improved academic performance</li><li>Better reading & writing skills</li><li>Greater classroom confidence</li></ul></div>
+                            </div>
                         </div>
-                        <div class="condition-treatments">
-                            <h5>Our Treatments:</h5>
-                            <ul>
-                                <li>Early intervention therapy</li>
-                                <li>Developmental milestone support</li>
-                                <li>Family-centered care plans</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="condition-card scale-in stagger-5" data-condition="learning disabilities">
-                    <div class="condition-card-header">
-                        <div class="condition-icon">🧩</div>
-                        <div class="condition-content">
-                            <h4>Learning Disabilities</h4>
-                            <p>Addressing cognitive challenges and building academic skills.</p>
-                        </div>
-                        <button class="condition-toggle">▼</button>
-                    </div>
-                    <div class="condition-details">
-                        <div class="condition-symptoms">
-                            <h5>Common Symptoms:</h5>
-                            <ul>
-                                <li>Difficulty with reading or writing</li>
-                                <li>Problems with math concepts</li>
-                                <li>Memory and processing issues</li>
-                                <li>Trouble following directions</li>
-                            </ul>
-                        </div>
-                        <div class="condition-treatments">
-                            <h5>Our Treatments:</h5>
-                            <ul>
-                                <li>Cognitive skill development</li>
-                                <li>Academic support strategies</li>
-                                <li>Memory and processing training</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="condition-card scale-in stagger-6" data-condition="motor disorders">
-                    <div class="condition-card-header">
-                        <div class="condition-icon">💪</div>
-                        <div class="condition-content">
-                            <h4>Motor Disorders</h4>
-                            <p>Improving coordination, balance, and fine motor skills.</p>
-                        </div>
-                        <button class="condition-toggle">▼</button>
-                    </div>
-                    <div class="condition-details">
-                        <div class="condition-symptoms">
-                            <h5>Common Symptoms:</h5>
-                            <ul>
-                                <li>Poor coordination</li>
-                                <li>Balance difficulties</li>
-                                <li>Fine motor skill challenges</li>
-                                <li>Muscle weakness or stiffness</li>
-                            </ul>
-                        </div>
-                        <div class="condition-treatments">
-                            <h5>Our Treatments:</h5>
-                            <ul>
-                                <li>Motor skill development</li>
-                                <li>Balance and coordination training</li>
-                                <li>Strength and flexibility exercises</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1718,7 +2654,7 @@
     <div class="section-divider"></div>
 
     <!-- Therapists Section -->
-    <section class="therapists-section section-highlight">
+    <!-- <section class="therapists-section section-highlight">
         <div class="container">
             <div class="badge-heading fade-slide">
                 <div class="badge">Expert Team</div>
@@ -1746,12 +2682,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <div class="section-divider"></div>
 
     <!-- Therapy Services Section -->
-    <section class="therapy-services section-highlight" id="services">
+    <!-- <section class="therapy-services section-highlight" id="services">
         <div class="container">
             <div class="modern-heading fade-slide">
                 <h2>Our Therapy Services</h2>
@@ -1788,15 +2724,15 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <div class="section-divider"></div>
 
-    <!-- Therapy Process Section -->
-    <section class="process-section section-highlight">
+    <!-- Why Our Therapy Matters Section -->
+    <section class="process-section section-highlight" id="why-therapy-matters">
         <div class="container">
             <div class="section-title fade-slide">
-                <h2>Your Therapy Journey</h2>
+                <h2>Why Our Therapy Matters</h2>
                 <p>Our structured approach to your child's progress</p>
             </div>
             <div class="process-steps">
@@ -1854,6 +2790,10 @@
                     <div class="why-choose-icon">📈</div>
                     <p>Progress-focused therapy with measurable outcomes and regular updates.</p>
                 </div>
+                <div class="why-choose-item fade-slide stagger-6">
+                    <div class="why-choose-icon">🌈</div>
+                    <p>Holistic care approach that considers physical, emotional, and developmental needs.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1861,7 +2801,7 @@
     <div class="section-divider"></div>
 
     <!-- Educational Resources Section -->
-    <section class="resources-section section-highlight">
+    <!-- <section class="resources-section section-highlight">
         <div class="container">
             <div class="section-title fade-slide">
                 <h2>Educational Resources</h2>
@@ -1885,12 +2825,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <div class="section-divider"></div>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section section-highlight">
+    <!-- <section class="testimonials-section section-highlight">
         <div class="container">
             <div class="gradient-heading fade-slide">
                 <div class="highlight">Success Stories</div>
@@ -1933,7 +2873,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <div class="section-divider"></div>
 
@@ -2104,9 +3044,31 @@
     <section class="cta-section section-highlight" id="contact">
         <div class="container">
             <div class="cta-box fade-slide">
+                <div class="cta-eyebrow">✨ Free 10-Minute Call</div>
                 <h2>Ready to Begin Your Child's Journey?</h2>
-                <p>Schedule a consultation to discuss your child's needs and learn how we can help.</p>
-                <a href="#" class="btn btn-primary btn-white">Schedule Consultation</a>
+                <div class="cta-subtitle">Let's Take the First Step Together</div>
+                <p>Every parent has questions, and it's completely natural to feel unsure. If you'd like to know more about our approach or discuss your child's needs, we invite you to book a free 10-minute call with our therapist.</p>
+                <div class="cta-highlight-bar">
+                    <span class="free-tag">FREE</span>
+                    <span class="call-text">🕐 10-Minute Consultation Call</span>
+                    <span class="divider">|</span>
+                    <span class="call-text">No Commitment Required</span>
+                </div>
+                <div class="cta-trust">
+                    <div class="cta-trust-item"><span>💬</span><span>No obligation, just a conversation</span></div>
+                    <div class="cta-trust-item"><span>🕐</span><span>Only 10 minutes of your time</span></div>
+                    <div class="cta-trust-item"><span>💚</span><span>We're here to listen &amp; guide</span></div>
+                </div>
+                <a href="#" class="btn btn-white">Book Your Free Call</a>
+                <br>
+                <a href="tel:9900000055" class="cta-phone">
+                    <span class="ph-icon">📞</span>
+                    <span>
+                        <span class="ph-label">Call us directly</span>
+                        <span class="ph-number">99 00000 00 55</span>
+                    </span>
+                </a>
+                <div class="cta-note">We're here to listen, guide, and support you — every step of the way.</div>
             </div>
         </div>
     </section>
@@ -2119,10 +3081,10 @@
                     <h4>About NeuroCare</h4>
                     <p>Dedicated to providing exceptional neurological therapy services for children and families with compassion, expertise, and innovation.</p>
                     <div class="footer-social">
-                        <a href="#" class="social-link" title="Facebook">f</a>
-                        <a href="#" class="social-link" title="Twitter">𝕏</a>
-                        <a href="#" class="social-link" title="LinkedIn">in</a>
-                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link facebook" title="Facebook"><i class="fab fa-facebook-f icon"></i></a>
+                        <a href="#" class="social-link twitter" title="Twitter"><i class="fab fa-twitter icon"></i></a>
+                        <a href="#" class="social-link linkedin" title="LinkedIn"><i class="fab fa-linkedin-in icon"></i></a>
+                        <a href="#" class="social-link instagram" title="Instagram"><i class="fab fa-instagram icon"></i></a>
                     </div>
                 </div>
 
@@ -2195,16 +3157,22 @@
             document.getElementById('scrollProgress').style.width = scrollPercent + '%';
         }
 
-        // Sticky Header with Reveal
+        // Sticky Header — hide on scroll down, show on scroll up
+        let lastScrollTop = 0;
         function handleHeaderReveal() {
             const header = document.getElementById('header');
             const scrollTop = window.pageYOffset;
-            
-            if (scrollTop > 100) {
+
+            if (scrollTop <= 80) {
+                header.classList.remove('revealed', 'scrolled');
+            } else if (scrollTop < lastScrollTop) {
+                // scrolling up
                 header.classList.add('revealed', 'scrolled');
             } else {
-                header.classList.remove('revealed', 'scrolled');
+                // scrolling down
+                header.classList.remove('revealed');
             }
+            lastScrollTop = scrollTop;
         }
 
         // Section Highlighting
@@ -2287,36 +3255,97 @@
             });
         });
 
-        // Enhanced Condition Cards with smooth animations
-        document.querySelectorAll('.condition-card').forEach(card => {
-            const toggle = card.querySelector('.condition-toggle');
-            
-            function toggleCard() {
-                const isExpanded = card.classList.contains('expanded');
-                
-                // Add smooth transition class
-                card.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                
-                card.classList.toggle('expanded');
-                
-                // Animate the toggle button
-                toggle.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-            }
-
-            card.addEventListener('click', (e) => {
-                if (e.target === toggle) return;
-                toggleCard();
+        // Mobile nav toggle
+        const hamburger = document.getElementById('navHamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+        // Mobile dropdown toggles
+        document.querySelectorAll('.nav-dropdown > a').forEach(a => {
+            a.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    a.parentElement.classList.toggle('open');
+                }
             });
-
-            toggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleCard();
+        });
+        // Close nav on link click
+        navLinks.querySelectorAll('li:not(.nav-dropdown) a, .dropdown-menu a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navLinks.classList.remove('open');
             });
         });
 
-        // Enhanced Search with animations
-        const searchInput = document.getElementById('disorder-search');
-        const searchResults = document.getElementById('search-results');
+        // Conditions: mobile tap-to-open
+        (function() {
+            const isTouchDevice = () => window.matchMedia('(max-width: 768px)').matches;
+            document.querySelectorAll('.condition-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    if (!isTouchDevice()) return;
+                    const wasOpen = card.classList.contains('tap-open');
+                    document.querySelectorAll('.condition-card.tap-open').forEach(c => c.classList.remove('tap-open'));
+                    if (!wasOpen) card.classList.add('tap-open');
+                });
+            });
+        })();
+
+        // Conditions: water-flood ripple on hover (desktop only)
+        (function() {
+            const grid = document.getElementById('conditionsGrid');
+            if (!grid) return;
+            const cards = Array.from(grid.querySelectorAll('.condition-card'));
+            let active = null, floodTimer = null;
+
+            function isDesktop() { return window.innerWidth > 768; }
+
+            function flood(card, e) {
+                if (!isDesktop()) return;
+                if (active === card) return;
+                if (active) recede(active, true);
+
+                const rect = card.getBoundingClientRect();
+                const rx = ((e ? e.clientX : rect.left + rect.width/2) - rect.left) + 'px';
+                const ry = ((e ? e.clientY : rect.top  + rect.height/2) - rect.top)  + 'px';
+                card.style.setProperty('--rx', rx);
+                card.style.setProperty('--ry', ry);
+
+                const gridRect = grid.getBoundingClientRect();
+                const maxDim = Math.sqrt(gridRect.width ** 2 + gridRect.height ** 2);
+                card.style.setProperty('--flood-scale', Math.ceil(maxDim / 10));
+
+                // lock at current height but ensure minimum of 480px for content
+                const lockedH = Math.max(grid.offsetHeight, 480);
+                grid.style.minHeight = lockedH + 'px';
+                grid.classList.add('has-hover');
+                card.classList.add('flooding');
+                active = card;
+
+                // once ripple covers card, mark as fully flooded so content shows
+                floodTimer = setTimeout(() => {
+                    if (active === card) {
+                        card.classList.add('flooded');
+                    }
+                }, 620);
+            }
+
+            function recede(card, immediate) {
+                clearTimeout(floodTimer);
+                card.classList.remove('flooding', 'flooded', 'receding');
+                grid.classList.remove('has-hover');
+                grid.style.minHeight = '';
+                active = null;
+            }
+
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', (e) => flood(card, e));
+            });
+            grid.addEventListener('mouseleave', () => {
+                if (active) recede(active, false);
+            });
+        })();
 
         // FAQ Functionality
         const faqItems = document.querySelectorAll('.faq-item');
@@ -2369,56 +3398,7 @@
             });
         });
 
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                document.querySelectorAll('.condition-card').forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.display = 'block';
-                        card.style.animation = 'fadeInUp 0.3s ease forwards';
-                    }, index * 50);
-                });
-                searchResults.textContent = '';
-                return;
-            }
-
-            let visibleCount = 0;
-            const matchedDisorders = [];
-
-            document.querySelectorAll('.condition-card').forEach((card, index) => {
-                const conditionName = card.getAttribute('data-condition');
-                const conditionTitle = card.querySelector('h4').textContent.toLowerCase();
-                
-                if (conditionName.includes(searchTerm) || conditionTitle.includes(searchTerm)) {
-                    setTimeout(() => {
-                        card.style.display = 'block';
-                        card.style.animation = 'fadeInUp 0.3s ease forwards';
-                    }, index * 50);
-                    visibleCount++;
-                    matchedDisorders.push(card.querySelector('h4').textContent);
-                } else {
-                    card.style.animation = 'fadeOutDown 0.2s ease forwards';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 200);
-                }
-            });
-
-            // Animate search results
-            setTimeout(() => {
-                if (visibleCount === 0) {
-                    searchResults.textContent = 'No disorders found matching your search.';
-                } else if (visibleCount === 1) {
-                    searchResults.textContent = `Found 1 disorder: ${matchedDisorders[0]}`;
-                } else {
-                    searchResults.textContent = `Found ${visibleCount} disorders: ${matchedDisorders.join(', ')}`;
-                }
-                searchResults.style.animation = 'fadeIn 0.3s ease forwards';
-            }, 300);
-        });
-
-        // Add CSS animations for search
+        // Add CSS animations
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeInUp {

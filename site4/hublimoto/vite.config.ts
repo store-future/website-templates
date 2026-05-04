@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  // base: '/website-templates/site4/hublimoto/dist/',
+  base: '/website-templates/site4/hublimoto/dist/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

@@ -1,10 +1,10 @@
 import "./Whatsnew.css";
-import r3Video from "../../../assets/video/R3.mp4";
-import trackVideo from "../../../assets/video/Yamaha Coimbatore Track Day.mp4";
-import img1 from "../../../assets/images/xsr_black-pc.webp";
-import img2 from "../../../assets/images/R15-S.png.webp";
-import img3 from "../../../assets/images/xsr_silver_price-award-pc.webp";
-import img4 from "../../../assets/images/download2.webp";
+import r3Video from "@/assets/video/R3.mp4";
+import trackVideo from "@/assets/video/Yamaha Coimbatore Track Day.mp4";
+import img1 from "@/assets/images/xsr_black-pc.webp";
+import img2 from "@/assets/images/R15-S.png.webp";
+import img3 from "@/assets/images/xsr_silver_price-award-pc.webp";
+import img4 from "@/assets/images/download2.webp";
 
 const cards = [
   { image: img1, tag: "New Launch", title: "XSR 900", sub: "Neo-Retro Sport", desc: "Torque-rich CP3 engine meets timeless design." },

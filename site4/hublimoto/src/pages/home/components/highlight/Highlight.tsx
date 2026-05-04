@@ -1,8 +1,8 @@
 import "./Highlight.css";
-import trackVideo from "../../../assets/video/Yamaha Coimbatore Track Day.mp4";
-import banner1 from "../../../assets/images/banner3.jpg";
-import banner2 from "../../../assets/images/banner7.jpg";
-import banner3 from "../../../assets/images/banner4.jpg";
+import trackVideo from "@/assets/video/Yamaha Coimbatore Track Day.mp4";
+import banner1 from "@/assets/images/banner3.jpg";
+import banner2 from "@/assets/images/banner7.jpg";
+import banner3 from "@/assets/images/banner4.jpg";
 function Highlight() {
   return (
     <>

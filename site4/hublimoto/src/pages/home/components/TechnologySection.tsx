@@ -1,4 +1,4 @@
-import techImg from "../.././assets/images/download.png";
+import techImg from "@/assets/images/download.png";
 
 function TechnologySection() {
 

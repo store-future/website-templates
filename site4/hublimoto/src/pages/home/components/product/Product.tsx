@@ -2,7 +2,7 @@ import "./Product.css";
 // import card1 from "../../../assets/images/download.png";
 // import bikewithmen from "../../../assets/images/bike-with-men.png";
 // import bikewithmen from "../../../assets/images/bike-with-men-removebg-preview.png";
-import bikewithmen from "../../../assets/images/bike-with-men2.png";
+import bikewithmen from "@/assets/images/bike-with-men2.png";
 
 
 

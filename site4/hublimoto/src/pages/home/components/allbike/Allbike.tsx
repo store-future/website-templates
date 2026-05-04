@@ -1,9 +1,9 @@
 import "./Allbike.css";
 import { useRef } from "react";
-import card1 from "../../../assets/images/download.png";
-import card2 from "../../../assets/images/download1.png";
-import card3 from "../../../assets/images/download2.webp";
-import card4 from "../../../assets/images/download.png";
+import card1 from "@/assets/images/download.png";
+import card2 from "@/assets/images/download1.png";
+import card3 from "@/assets/images/download2.webp";
+import card4 from "@/assets/images/download.png";
 
 function Allbike() {
   const bikes = [

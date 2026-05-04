@@ -1,9 +1,6 @@
 import "./AboutSection.css";
-// import imgMain from "../../../assets/images/banner2.webp";
-
-import imgMain from "../../../assets/images/banner6.jpg";
-// import imgOverlap from "../../../assets/images/bike-with-men-removebg-preview.png";
-import imgOverlap from "../../../assets/images/banner8.jpg";
+import imgMain from "@/assets/images/banner6.jpg";
+import imgOverlap from "@/assets/images/banner8.jpg";
 
 function AboutSection() {
   return (

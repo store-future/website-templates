@@ -1,5 +1,5 @@
 import './Footer.css'
-import yamahaLogo from '../assets/logos/brand-logo.webp'
+import yamahaLogo from '@/assets/logos/brand-logo.webp'
 
 function Footer() {
   return (

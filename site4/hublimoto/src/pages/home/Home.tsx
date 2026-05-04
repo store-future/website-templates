@@ -1,12 +1,12 @@
-import Banner from "../../components/HomeSections/Banner/Banner";
-import Whatsnew from "../../components/HomeSections/whatsnew/Whatsnew";
-// import Discover from "../../components/HomeSections/discover/Discover";
-// import Bikecarousal from "../../components/HomeSections/selecttype_copy/Selecttype";
-import Product from "../../components/HomeSections/product/Product";
-import Allbike from "../../components/HomeSections/allbike/Allbike";
-import Highlight from "../../components/HomeSections/highlight/Highlight";
-import TechnologySection from "../../components/HomeSections/TechnologySection";
-import AboutSection from "../../components/HomeSections/about/AboutSection";
+import Banner from "./components/Banner/Banner";
+import Whatsnew from "./components/whatsnew/Whatsnew";
+// import Discover from "./components/discover/Discover";
+// import Bikecarousal from "./components/selecttype/Selecttype";
+import Product from "./components/product/Product";
+import Allbike from "./components/allbike/Allbike";
+import Highlight from "./components/highlight/Highlight";
+import TechnologySection from "./components/TechnologySection";
+import AboutSection from "./components/about/AboutSection";
 // import bikeImage from "../../assets/images/download.png";
 
 

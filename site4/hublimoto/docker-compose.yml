@@ -1,0 +1,7 @@
+services:
+  hublimoto:
+    build: .
+    container_name: hublimoto
+    ports:
+      - "3000:80"
+    restart: unless-stopped

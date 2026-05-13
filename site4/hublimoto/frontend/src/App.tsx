@@ -7,6 +7,8 @@ import Home from './pages/home/Home'
 import About from './pages/About'
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Test from "./components/Test";
+
 // import bikeImage from "./assets/images/download.png";
 
 
@@ -19,8 +21,10 @@ function App() {
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Navbar />
         <Routes>
+          <Route path="/test" element={<Test />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+
         </Routes>
       <Footer />
     </BrowserRouter>

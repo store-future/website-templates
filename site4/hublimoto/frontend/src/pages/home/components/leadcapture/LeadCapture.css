@@ -1,0 +1,412 @@
+/* ════════════════════════════════════════
+   LEAD CAPTURE — PREMIUM YAMAHA SECTION
+════════════════════════════════════════ */
+
+.lc-section {
+  padding: 50px 0;
+  background: #f4f4f2;
+}
+
+/* ── Constrained wrapper ── */
+.lc-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Inner layout — the dark premium container ── */
+.lc-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 72px 80px;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 80% at 20% 50%, rgba(225, 6, 0, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 30%, rgba(0, 51, 153, 0.1) 0%, transparent 55%),
+    linear-gradient(160deg, #0f0f0f 0%, #080808 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(225, 6, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ── Noise grain overlay on inner ── */
+.lc-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Diagonal red slash accent ── */
+.lc-slash {
+  position: absolute;
+  top: 0;
+  right: 45%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, #e10600 25%, #ff2200 50%, #e10600 75%, transparent 100%);
+  opacity: 0.6;
+  transform: skewX(-8deg);
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 0 12px rgba(225, 6, 0, 0.5);
+}
+
+/* ════════════════════════════════════════
+   LEFT PANEL — Marketing
+════════════════════════════════════════ */
+.lc-left {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Live urgency pill ── */
+.lc-urgency {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(225, 6, 0, 0.1);
+  border: 1px solid rgba(225, 6, 0, 0.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ff4444;
+  margin-bottom: 18px;
+  width: fit-content;
+}
+
+.lc-urgency-dot {
+  width: 7px;
+  height: 7px;
+  background: #e10600;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: lc-blink 1.3s ease-in-out infinite;
+  box-shadow: 0 0 6px #e10600;
+}
+
+@keyframes lc-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.3; transform: scale(0.65); }
+}
+
+/* ── Main headline ── */
+.lc-headline {
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin: 0 0 14px;
+}
+
+.lc-headline-accent {
+  display: block;
+  background: linear-gradient(100deg, #e10600 0%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Sub copy ── */
+.lc-copy {
+  font-size: 0.95rem;
+  color: #888;
+  line-height: 1.8;
+  margin: 0 0 28px;
+  max-width: 480px;
+  padding-left: 14px;
+  border-left: 2px solid #e10600;
+}
+
+.lc-copy strong { color: #ddd; }
+
+/* ── Benefit cards ── */
+.lc-benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.lc-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 5px 16px;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  cursor: default;
+}
+
+.lc-benefit:hover {
+  border-color: rgba(225, 6, 0, 0.3);
+  background: rgba(225, 6, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+.lc-benefit-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.lc-benefit-text {
+  font-size: 0.84rem;
+  color: #bbb;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ── Trust strip ── */
+.lc-trust {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.lc-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #444;
+}
+
+.lc-trust-item::before {
+  content: "✓";
+  color: #e10600;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.lc-trust-sep {
+  width: 1px;
+  height: 12px;
+  background: #2a2a2a;
+}
+
+/* ════════════════════════════════════════
+   RIGHT PANEL — Form card
+════════════════════════════════════════ */
+.lc-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.lc-form-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(225, 6, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Red top accent line on card ── */
+.lc-form-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #e10600, #ff4444, #e10600);
+  background-size: 200% 100%;
+  animation: lc-card-stripe 2.5s linear infinite;
+}
+
+@keyframes lc-card-stripe {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* ── Card glow ── */
+.lc-form-card::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(225, 6, 0, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.lc-form-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e10600;
+  margin-bottom: 4px;
+}
+
+.lc-form-subtitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 20px;
+  line-height: 1.3;
+}
+
+/* ── Form ── */
+.lc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.lc-field { position: relative; }
+
+.lc-field input,
+.lc-field select {
+  width: 100%;
+  padding: 13px 14px 13px 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lc-field input::placeholder { color: #7a8aaa; }
+.lc-field select { color: #7a8aaa; }
+.lc-field select.filled { color: #fff; }
+.lc-field select option { background: #141414; color: #fff; }
+
+.lc-field input:focus,
+.lc-field select:focus {
+  border-color: rgba(225, 6, 0, 0.5);
+  background: rgba(225, 6, 0, 0.04);
+  box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.08);
+}
+
+.lc-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ── CTA button ── */
+.lc-btn {
+  position: relative;
+  padding: 16px 20px;
+  background: #e10600;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  margin-top: 2px;
+}
+
+.lc-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.lc-btn:hover::before { left: 160%; }
+
+.lc-btn:hover {
+  background: #c50500;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(225, 6, 0, 0.45);
+}
+
+.lc-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.lc-disclaimer {
+  font-size: 10px;
+  color: #bbb;
+  text-align: center;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .lc-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 36px 32px;
+  }
+
+  .lc-wrap { padding: 0 24px; }
+}
+
+@media (max-width: 560px) {
+  .lc-section { padding: 32px 0; }
+
+  .lc-inner { padding: 28px 20px; }
+
+  .lc-benefits { grid-template-columns: 1fr; }
+
+  .lc-row { grid-template-columns: 1fr; }
+
+  .lc-headline { letter-spacing: -0.5px; }
+
+  .lc-wrap { padding: 0 16px; }
+}

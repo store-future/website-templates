@@ -1,0 +1,684 @@
+/* ═══════════════════════════════════════════
+   SECTION
+═══════════════════════════════════════════ */
+.pd-section {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.pd-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, #000 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.pd-bg-deep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #000 0%, #060606 40%, #0a0a0a 100%);
+  z-index: 0;
+}
+
+.pd-ambient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 35% at 35% 60%, rgba(200,168,75,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 25% at 5%  75%, rgba(232,0,29,0.04)   0%, transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   CINEMATIC HEADING
+═══════════════════════════════════════════ */
+.pd-heading-wrap {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 72px 6% 52px;
+  text-align: center;
+}
+
+.pd-heading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.pd-heading-line {
+  height: 1px;
+  max-width: 560px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(232,0,29,0.55),
+    rgba(255,255,255,0.25),
+    rgba(232,0,29,0.55),
+    transparent
+  );
+}
+
+.pd-heading-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin: 0;
+}
+
+.pd-heading-title {
+  font-size: clamp(36px, 5.5vw, 76px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.pd-heading-white {
+  color: #fff;
+  text-shadow: 0 0 60px rgba(255,255,255,0.06);
+}
+
+.pd-heading-red {
+  color: #e8001d;
+  text-shadow: 0 0 40px rgba(232,0,29,0.5), 0 0 80px rgba(232,0,29,0.18);
+}
+
+.pd-heading-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT — mobile: column | ≥1024px: row
+═══════════════════════════════════════════ */
+.pd-layout {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ═══════════════════════════════════════════
+   LEFT — BIKE STAGE
+═══════════════════════════════════════════ */
+.pd-left {
+  position: relative;
+  overflow: hidden;
+  height: 88vw;
+  min-height: 340px;
+  max-height: 520px;
+}
+
+/* cinematic scanline */
+.pd-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.025) 3px,
+    rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* spotlight cone */
+.pd-halo-top {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 100%;
+  /* background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 55deg,
+    rgba(200,168,75,0.08) 90deg,
+    rgba(255,255,255,0.035) 120deg,
+    rgba(200,168,75,0.08) 150deg,
+    transparent 175deg
+  ); */
+  pointer-events: none;
+  z-index: 2;
+  /* filter: blur(6px); */
+}
+
+/* ground glow */
+.pd-halo-bottom {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 45%;
+  background: radial-gradient(
+    ellipse 75% 55% at 50% 100%,
+    rgba(200,168,75,0.14) 0%,
+    rgba(232,0,29,0.05) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(14px);
+}
+
+/* bike image — centered in stage */
+.pd-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.pd-stage-img {
+  width: 88%;
+  max-width: 480px;
+  height: 85%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 50px rgba(200,168,75,0.16))
+    drop-shadow(0 20px 50px rgba(0,0,0,0.95));
+  pointer-events: none;
+  transform: translateY(-6%);
+}
+
+.pd-platform-ring {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52%;
+  height: 14px;
+  border-radius: 50%;
+  background: transparent;
+  border-bottom: 1.5px solid rgba(255,255,255,0.3);
+  box-shadow: 0 4px 28px rgba(255,255,255,0.09), 0 0 50px rgba(200,168,75,0.1);
+  z-index: 5;
+}
+
+.pd-platform-glow {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 32%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(200,168,75,0.11) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── TOP-LEFT: 4 key indicators ── */
+.pd-top-indicators {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 18px;
+}
+
+/* ── BOTTOM-LEFT: name + price + button ── */
+.pd-bottom-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 55%;
+  padding: 28px 24px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  /* background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 65%, transparent 100%); */
+}
+
+.pd-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #c8a84b;
+  margin: 0 0 5px;
+}
+
+.pd-bike-name {
+  font-size: clamp(20px, 3vw, 44px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+  margin: 0 0 10px;
+  text-shadow: 0 0 30px rgba(200,168,75,0.12);
+}
+
+.pd-bike-desc { display: none; }
+.pd-specs      { display: none; }
+
+/* spec cell — horizontal icon + text row */
+.pd-spec-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 10px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(200,168,75,0.18);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  min-width: 130px;
+}
+
+.pd-spec-cell::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(200,168,75,0.7), transparent);
+}
+
+.pd-spec-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: #c8a84b;
+  opacity: 0.85;
+}
+
+.pd-spec-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pd-spec-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pd-spec-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+}
+
+.pd-spec-unit {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(200,168,75,0.7);
+}
+
+.pd-spec-label {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+/* price */
+.pd-price {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 14px;
+}
+
+.pd-price-label {
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.pd-price-val {
+  font-size: clamp(16px, 2.2vw, 26px);
+  font-weight: 900;
+  color: #c8a84b;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 20px rgba(200,168,75,0.3);
+}
+
+/* CTA */
+.pd-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: #fff;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.pd-cta:hover {
+  background: rgba(232,0,29,0.1);
+  border-color: #e8001d;
+  box-shadow: 0 0 18px rgba(232,0,29,0.2);
+}
+
+/* ═══════════════════════════════════════════
+   RIGHT — CHOOSE YOUR RIDE
+═══════════════════════════════════════════ */
+.pd-right {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.65);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  min-height: 460px;
+}
+
+.pd-right-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 18px 0 0;
+  margin: 0 0 14px;
+  flex-shrink: 0;
+}
+
+.pd-cat-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+
+.pd-cat-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.pd-cat-icon { font-size: 17px; line-height: 1; }
+
+.pd-cat-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.28);
+  transition: color 0.2s;
+}
+
+.pd-cat-tab.active .pd-cat-label { color: #c8a84b; }
+
+.pd-tab-underline {
+  position: absolute;
+  bottom: -1px;
+  left: 14%; right: 14%;
+  height: 2px;
+  background: #c8a84b;
+  border-radius: 2px;
+}
+
+.pd-cols {
+  display: flex;
+  flex: 1;
+  gap: 6px;
+  padding: 8px;
+  overflow: visible;
+  min-height: 0;
+}
+
+.pd-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.015);
+  transition: border-color 0.3s;
+}
+
+.pd-col-active {
+  border-color: rgba(200,168,75,0.28);
+  background: rgba(200,168,75,0.025);
+}
+
+.pd-col-list {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+
+.pd-col-list::-webkit-scrollbar { display: none; }
+
+.pd-bike-row {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.2s;
+}
+
+.pd-bike-row:hover { background: rgba(255,255,255,0.04); }
+
+.pd-bike-row-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.42);
+  transition: color 0.2s;
+  line-height: 1.3;
+}
+
+.pd-bike-row-active .pd-bike-row-name {
+  color: #fff;
+  font-weight: 700;
+}
+
+.pd-active-bar {
+  position: absolute;
+  left: 0; top: 5px; bottom: 5px;
+  width: 3px;
+  background: #c8a84b;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 10px rgba(200,168,75,0.6);
+}
+
+.pd-active-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #c8a84b;
+  box-shadow: 0 0 6px rgba(200,168,75,0.8);
+  flex-shrink: 0;
+}
+
+.pd-col-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  margin: 6px auto 8px;
+  transition: background 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+
+.pd-col-dot-active {
+  background: #c8a84b;
+  box-shadow: 0 0 7px rgba(200,168,75,0.7);
+}
+
+/* ═══════════════════════════════════════════
+   LONG BLACK TAIL — next section feels dark
+═══════════════════════════════════════════ */
+.pd-tail {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to bottom, #0a0a0a 0%, #000 100%);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* ═══════════════════════════════════════════
+   ≥ 1024px — LAPTOP / DESKTOP
+═══════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .pd-heading-wrap { padding: 80px 6% 56px; }
+
+  .pd-layout {
+    flex-direction: row;
+    height: 100vh;
+    min-height: 600px;
+    max-height: 900px;
+  }
+
+  .pd-left {
+    flex: 0 0 62%;
+    height: 100%;
+    max-height: none;
+    min-height: 0;
+  }
+
+  .pd-stage-img {
+    width: 82%;
+    max-width: 600px;
+    height: 78%;
+    transform: translateY(-5%);
+  }
+
+  .pd-platform-ring { bottom: 11%; width: 50%; }
+
+  .pd-top-indicators { top: 4%; padding: 16px 24px; gap: 8px; }
+  .pd-spec-cell { min-width: 140px; padding: 9px 14px 9px 12px; }
+  .pd-spec-icon { width: 30px; height: 30px; }
+  .pd-spec-val  { font-size: 16px; }
+  .pd-spec-label { font-size: 8px; }
+
+  .pd-bottom-info { width: 46%; padding: 32px 32px 28px 40px; }
+  .pd-bike-name { font-size: clamp(26px, 2.6vw, 46px); margin-bottom: 12px; }
+  .pd-price-val { font-size: clamp(20px, 2.2vw, 30px); }
+  .pd-cta       { padding: 9px 18px; font-size: 9px; }
+
+  .pd-right {
+    flex: 0 0 38%;
+    height: 100%;
+    min-height: 0;
+    border-top: none;
+    border-left: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .pd-right-title { font-size: 11px; padding: 28px 0 0; margin-bottom: 16px; }
+  .pd-cat-icon    { font-size: 19px; }
+  .pd-cat-label   { font-size: 10px; }
+
+  .pd-cols {
+    flex: 1;
+    overflow: hidden;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .pd-col { overflow: hidden; }
+  .pd-col-list { overflow-y: auto; flex: 1; }
+
+  .pd-bike-row      { padding: 12px; }
+  .pd-bike-row-name { font-size: 12.5px; }
+}
+
+/* ═══════════════════════════════════════════
+   ≥ 1400px — wide desktop
+═══════════════════════════════════════════ */
+@media (min-width: 1400px) {
+  .pd-layout { max-height: 960px; }
+
+  .pd-left { flex: 0 0 63%; }
+  .pd-stage-img { max-width: 680px; }
+
+  .pd-top-indicators { top: 4%; padding: 18px 28px; gap: 9px; }
+  .pd-spec-cell { min-width: 150px; padding: 10px 16px 10px 13px; }
+  .pd-spec-icon { width: 32px; height: 32px; }
+  .pd-spec-val  { font-size: 17px; }
+  .pd-spec-label { font-size: 8.5px; }
+
+  .pd-bottom-info { width: 44%; padding: 36px 36px 32px 52px; }
+  .pd-bike-name  { font-size: clamp(30px, 2.8vw, 50px); margin-bottom: 14px; }
+  .pd-price-val  { font-size: clamp(22px, 2.4vw, 32px); }
+  .pd-cta        { padding: 10px 20px; font-size: 10px; }
+
+  .pd-right { flex: 0 0 37%; }
+  .pd-right-title { font-size: 12px; padding: 32px 0 0; }
+  .pd-bike-row      { padding: 13px 14px; }
+  .pd-bike-row-name { font-size: 13px; }
+}
+
+/* ═══════════════════════════════════════════
+   ≥ 2200px — 4K / ultra-wide
+═══════════════════════════════════════════ */
+@media (min-width: 2200px) {
+  .pd-heading-wrap    { padding: 120px 6% 80px; }
+  .pd-heading-title   { font-size: 100px; }
+  .pd-heading-eyebrow { font-size: 14px; }
+  .pd-heading-sub     { font-size: 18px; }
+
+  .pd-layout { max-height: 1200px; }
+  .pd-stage-img { max-width: 960px; }
+
+  .pd-top-indicators { top: 4%; padding: 24px 40px; gap: 12px; }
+  .pd-spec-cell  { min-width: 200px; padding: 14px 20px 14px 16px; border-radius: 10px; }
+  .pd-spec-icon  { width: 40px; height: 40px; }
+  .pd-spec-val   { font-size: 24px; }
+  .pd-spec-unit  { font-size: 13px; }
+  .pd-spec-label { font-size: 11px; }
+
+  .pd-bottom-info { width: 40%; padding: 48px 48px 44px 72px; }
+  .pd-bike-name  { font-size: 64px; margin-bottom: 20px; }
+  .pd-price-val  { font-size: 44px; }
+  .pd-cta        { padding: 14px 28px; font-size: 12px; }
+
+  .pd-right-title { font-size: 15px; padding: 48px 0 0; letter-spacing: 0.32em; }
+  .pd-cat-icon    { font-size: 26px; }
+  .pd-cat-label   { font-size: 13px; }
+  .pd-bike-row      { padding: 18px; }
+  .pd-bike-row-name { font-size: 17px; }
+  .pd-active-bar    { width: 4px; }
+  .pd-active-dot    { width: 8px; height: 8px; }
+
+  .pd-tail { height: 300px; }
+}

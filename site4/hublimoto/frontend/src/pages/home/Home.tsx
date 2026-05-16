@@ -1,4 +1,5 @@
 import Banner from "./components/Banner/Banner";
+import ProductDisplay from "./components/productdisplay/ProductDisplay";
 import Whatsnew from "./components/whatsnew/Whatsnew";
 // import Discover from "./components/discover/Discover";
 // import Bikecarousal from "./components/selecttype/Selecttype";
@@ -6,6 +7,7 @@ import Product from "./components/product/Product";
 import Allbike from "./components/allbike/Allbike";
 import Highlight from "./components/highlight/Highlight";
 import TechnologySection from "./components/TechnologySection";
+import LeadCapture from "./components/leadcapture/LeadCapture";
 import AboutSection from "./components/about/AboutSection";
 // import bikeImage from "../../assets/images/download.png";
 
@@ -15,12 +17,14 @@ function Home() {
   return (
     <>
       <Banner />
+      <ProductDisplay />
       <Product />
-      <Allbike />
       <AboutSection />
+      <Allbike />
       <Highlight />
       <Whatsnew />
-      <TechnologySection/>
+      {/* <TechnologySection/> */}
+      <LeadCapture />
       {/* <Bikecarousal /> */}
       {/* <Discover /> */}
 

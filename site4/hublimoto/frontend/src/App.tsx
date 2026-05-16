@@ -4,7 +4,7 @@
 // import './App.css'
 import {BrowserRouter, Routes, Route } from 'react-router-dom' ;
 import Home from './pages/home/Home'
-import About from './pages/About'
+import About from './pages/about/About'
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Test from "./components/Test";

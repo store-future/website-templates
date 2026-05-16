@@ -153,7 +153,13 @@ function Navbar() {
       <header className={`navbar ${isVisible ? "visible" : "hidden"} ${isScrolled ? "scrolled" : ""}`}>
         <div className="nav-container">
           <div className="logo">
-            <Link to="/"><img src={logo} alt="Yamaha Logo" /></Link>
+            <Link to="/" className="logo-lockup">
+              <img src={logo} alt="Yamaha Logo" />
+              <div className="brand-wordmark">
+                <span className="brand-name">Hubli Moto Wheels</span>
+                <span className="brand-tagline">Official Yamaha Dealer</span>
+              </div>
+            </Link>
           </div>
 
           <ul className="nav-links">

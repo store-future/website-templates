@@ -13,10 +13,10 @@ function Product() {
     <>
     <div className="wn-section">
 
-      <div className="wn-header">
+      {/* <div className="wn-header">
         <div className="wn-eyebrow">Explore Special Programs</div>
         <div className="wn-title">Make The Most <span>Of Yamaha</span></div>
-      </div>
+      </div> */}
 
    
     </div>

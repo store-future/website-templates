@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    }
+
+    .container {
+    display: flex;
+    height: 100vh;
+    }
+
+    /* LEFT SIDE */
+    .left {
+    flex: 1;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .left img {
+    max-width: 80%;
+    height: auto;
+    }
+
+    /* RIGHT SIDE */
+    .right {
+    flex: 1;
+    padding: 20px;
+    }
+
+    /* TABS */
+    .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    }
+
+    .tab {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    background: #e0e0e0;
+    border-radius: 8px;
+    }
+
+    .tab.active {
+    background: #111;
+    color: #fff;
+    }
+
+    /* CONTENT */
+    .tab-panel {
+    display: none;
+    }
+
+    .tab-panel.active {
+    display: block;
+    }
+
+    /* RESPONSIVE: 400 - 700 */
+    @media (max-width: 700px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left {
+        height: 250px;
+    }
+
+    .tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    }
+
+    /* LARGE SCREENS */
+    @media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        margin: auto;
+    }
+    }
+        
+</style>
+
+
+<div class="container">
+
+  <!-- LEFT: IMAGE -->
+  <div class="left">
+    <img src="site4/hublimoto/frontend/src/assets/images/download.png" alt="Bike Image" />
+  </div>
+
+  <!-- RIGHT: TABS -->
+  <div class="right">
+
+    <div class="tabs">
+      <button class="tab active" data-tab="motorcycle">Motorcycle</button>
+      <button class="tab" data-tab="scooter">Scooter</button>
+      <button class="tab" data-tab="ev">EV</button>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-panel active" id="motorcycle">
+        <ul>
+          <li>Yamaha R15</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="scooter">
+        <ul>
+          <li>Activa 6G</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="ev">
+        <ul>
+          <li>Ola S1</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".tab-panel");
+
+
+    tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+
+        // remove active from all tabs
+        tabs.forEach(t => t.classList.remove("active"));
+          .classList.add("active");
+
+        // hide all panels
+        panels.forEach(p => p.classList.remove("active"));
+
+        // show selected panel
+        const target = tab.getAttribute("data-tab");
+        document.getElementById(target).classList.add("active");
+
+    });
+    });
+
+</script>
+</body>
+</html>

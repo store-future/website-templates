@@ -13,8 +13,8 @@ function AboutSection() {
             <img src={imgMain} alt="Hublimoto workshop" className="about-img-main" />
             <img src={imgOverlap} alt="Bike" className="about-img-overlap" />
             <div className="about-badge">
-              <span className="about-badge-num">13+</span>
-              <span className="about-badge-text">Years of<br />Experience</span>
+              <span className="about-badge-num">9+</span>
+              <span className="about-badge-text">Years of<br />Trust</span>
             </div>
           </div>
 
@@ -30,24 +30,27 @@ function AboutSection() {
               <span className="about-title-accent">Passionate</span> Rider
             </h2>
 
+            <p className="about-lead">
+              First-time buyer — your perfect Yamaha is waiting for you here.
+            </p>
             <p className="about-desc">
-              Since 2004, Hublimoto has been crafting motorcycles that push the
-              boundaries of performance and design. Every machine we build is a
-              statement — precision-engineered, road-tested, and rider-approved.
+            We don't just sell bikes — we deliver the full Yamaha experience. Largest authorised Yamaha dealership in North Karnataka, we bring you the complete range of Yamaha two-wheelers, backed by expert guidance, genuine accessories, and service you can trust.
+            Whether you're a first-time buyer looking for a dependable commuter or a passionate rider seeking the thrill of performance 
+
             </p>
 
             <div className="about-stats">
+            <div>
+              <span className="about-stat-num">#1</span>
+              <span className="about-stat-label">Yamaha Showroom in Hubli</span>
+            </div>
               <div>
-                <span className="about-stat-num">13+</span>
-                <span className="about-stat-label">Years Active</span>
+                <span className="about-stat-num">40 +</span>
+                <span className="about-stat-label">Models</span>
               </div>
               <div>
-                <span className="about-stat-num">48</span>
-                <span className="about-stat-label">Models Built</span>
-              </div>
-              <div>
-                <span className="about-stat-num">113k</span>
-                <span className="about-stat-label">Happy Riders</span>
+                <span className="about-stat-num">50K </span>
+                <span className="about-stat-label">Happy Riders </span>
               </div>
             </div>
 
